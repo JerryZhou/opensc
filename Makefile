@@ -19,4 +19,34 @@
 # IN THE SOFTWARE.
 #
 
+# src
 SRCDIR ?= $(CURDIR)
+
+# platform
+PLATFORM ?= $(shell sh -c 'uname -s | tr "[A-Z]" "[a-z]"')
+
+TARGET=abc
+INC = -I. -I$(SRCDIR)/include -I$(SRCDIR)/src
+VPATH = .:test:src
+
+SRC_PATH=$(foreach dir,$(subst :, ,$(VPATH)),$(wildcard $(dir)/*.cpp))
+OBJS := $(subst .cpp,.o,$(SRC_PATH))
+$(info OBJS = $(OBJS))
+
+CXX = g++
+CXXFLAGS = -g
+
+$(TARGET):$(OBJS) 
+	$(CXX) -o $@ $(OBJS) $(INC) $(CXXFLAGS)
+
+$(OBJS):%.o:%.cpp %.cpp.d
+	$(CXX) -o $@ -c $< $(INC) $(CXXFLAGS)
+
+DEPS = $(OBJS:.o=.cpp.d)
+$(DEPS):%.cpp.d : %.cpp
+	$(CXX) $< -MM $(INC) > $<.d
+
+clean:
+	@rm -rf $(OBJS) 
+	@rm -rf $(DEPS)
+	@rm -rf $(TARGET)
