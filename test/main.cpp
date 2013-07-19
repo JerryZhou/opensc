@@ -11,6 +11,7 @@ using ::testing::TestInfo;
 using ::testing::TestPartResult;
 using ::testing::UnitTest;
 
+#include "test_log.h"
 #include "test_mutex.h"
 #include "test_target.h"
 #include "test_refcountedtarget.h"

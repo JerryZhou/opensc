@@ -4,8 +4,12 @@
 /// libc
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdarg.h>
 #include <math.h>
 #include <assert.h>
+
+/// sys
+#include <sys/time.h>
 
 /// standard template lib(stl)
 #include <queue>
@@ -13,19 +17,9 @@
 #include <string>
 #include <map>
 
-/// android ndk
-//#include <jni.h>
-//#include <android/log.h>
-
-/// cocos2d-x
-//#include <cocos2d.h>
-//#include <cocos-ext.h>
-//#include <platform/android/jni/JniHelper.h>
-
 /// self include
 #include "mutex.h"
 #include "interlocked.h"
-#include "log.h"
 #include "macrodef.h"
 
 /// thead safe list
