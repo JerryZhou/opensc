@@ -1,36 +1,31 @@
-# /bin/sh
+#!/bin/sh
 
-make -f Makefile.opensc
-make -f Makefile.test
+#make -f Makefile.opensc
+#make -f Makefile.test
 
-#function build_proj_cmd(){
-#    proj=$1
-#    cmd=$2
-#
-#    if [ "$cmd" -eq "c" ]; then
-#	make clean -f $proj
-#    else
-#	make -f $proj
-#    fi
-#}
+function build_proj_cmd()
+{
+    echo "------------------begin build----------------------------------------------------"
+    if [ "$2" == "c" ]; then
+	make clean -f $1
+    else
+	make -f $1
+    fi
+    echo "------------------end build----------------------------------------------------"
+    echo "\n"
+}
 
 #$(build_proj_cmd "Makefile.opensc" "c")
 #$(build_proj_cmd "Makefile.test" "c")
 
-#allproj=all
-#proj=$1
-#cmd=$2
-
-#echo $proj
-#echo $cmd
-
-#if [ $proj -eq "$allproj" ]; then
-#    $(build_proj_cmd "Makefile.opensc" $cmd)
-#    $(build_proj_cmd "Makefile.test" $cmd)
-#else
-#    mkfile="Makefile.$proj"
-#    if [ -f $mkfile ]; then
-#	$(build_proj_cmd $mkfile $cmd)
-#    fi
-#fi
+if [ "$1" == "all" ]; then
+    echo "build all proj"
+    build_proj_cmd "Makefile.opensc" $2
+    build_proj_cmd "Makefile.test" $2
+else
+    mkfile="Makefile.$1"
+    if [ -f $mkfile ]; then
+	build_proj_cmd $mkfile $2
+    fi
+fi
 
