@@ -27,13 +27,15 @@ EventDelegate& EventDelegate::operator = (const EventDelegate& other){
 
 	// release old target
 	m_target = other.m_target;
+	// take the same handle address
+	m_handle = other.m_handle;
 }
 
 /// override operator ==
-bool EventDelegate::operator == (const EventDelegate& other){
+bool EventDelegate::operator == (const EventDelegate& other) const{
 	// if other is same as this
 	IF_DO(this == &other, return true);
-	IF_DO(this->m_target == other.m_target
+	IF_DO(this->m_target.rawPtr() == other.m_target.rawPtr()
 			&& this->m_handle == other.m_handle, return true);
 
 	return false;
@@ -55,4 +57,15 @@ bool EventDelegate::invoke(Event* evt){
 	}
 	return false;
 }
+
+/// get the selector of event
+JSEL_EventHandler EventDelegate::handle() const{
+    return m_handle;
+}
+
+/// get the target
+Base::EventTarget* EventDelegate::target() const{
+    return m_target;
+}
+
 }// end of Base

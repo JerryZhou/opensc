@@ -27,12 +27,12 @@ namespace Base{
      * A variant of __android_log_print() that takes a va_list to list
      * additional parameters.
      * */
-    inline int __sc_log_vprint(int prio, const char* tag, const char* fmt, va_list ap);
+    int __sc_log_vprint(int prio, const char* tag, const char* fmt, va_list ap);
 
     /*
      * Send a formatted string to the log, used like printf(fmt,...)
      **/
-    inline int __sc_log_print(int prio, const char* tag, const char* fmt, ...);
+    int __sc_log_print(int prio, const char* tag, const char* fmt, ...);
 }
 
 #ifndef LOGV

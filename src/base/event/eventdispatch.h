@@ -1,5 +1,5 @@
-#ifndef __EVENTDISPATCH_H_
-#define __EVENTDISPATCH_H_  
+#ifndef __JB_EVENTDISPATCH_H_
+#define __JB_EVENTDISPATCH_H_  
 
 #include "stdinc.h"
 #include "base/event/eventdelegate.h"
@@ -10,7 +10,7 @@ namespace Base{
 class EventDispatch {
 public:
 	/// type binding
- 	typedef std::list<EventDelegate> DelegateList;
+ 	typedef std::list<Base::EventDelegate> DelegateList;
  	typedef DelegateList::iterator DelegateIte;
  	typedef DelegateList::const_iterator DelegateConstIte;
 

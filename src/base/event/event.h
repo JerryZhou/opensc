@@ -9,18 +9,26 @@ namespace Base{
 /// event
 class Event{
 public:
-	virtual ~Event(){
-	}
+    /// default constructor
+    Event()
+    : id(0)
+    , param(NULL) {
+    }
+    /// default destructor
+    virtual ~Event(){
+    }
 
 public:
-	int id; // event id
-	void* param;// event params
-	//JNIEnv *env; // jni env
-	//jobjectArray args; // java event array, do not save
+    /// data members
+    int id; // event id
+    void* param;// event params
 };// end of Event
 
+/// event id from 0
 typedef int EventId;
+/// event handler
 typedef void (Base::EventTarget::*JSEL_EventHandler)(Base::Event*);
+/// selector, from object-c
 #define jevent_selector(_SELECTOR) (Base::JSEL_EventHandler)(&_SELECTOR)
 
 }// end of Base

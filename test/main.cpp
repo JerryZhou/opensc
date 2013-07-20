@@ -11,10 +11,16 @@ using ::testing::TestInfo;
 using ::testing::TestPartResult;
 using ::testing::UnitTest;
 
-#include "test_log.h"
+#include "test_macrodef.h"
 #include "test_mutex.h"
 #include "test_target.h"
-#include "test_refcountedtarget.h"
+
+#include "base/test_log.h"
+#include "base/test_refcountedtarget.h"
+#include "base/event/test_event.h"
+#include "base/event/test_eventtarget.h"
+#include "base/event/test_eventdelegate.h"
+#include "base/event/test_eventdispatch.h"
 
 int main(int argc, char* argv[]){
     InitGoogleTest(&argc, argv);

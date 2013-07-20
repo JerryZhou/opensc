@@ -12,7 +12,7 @@
 /**
  * clamp the v to [min, max]
  * */
-inline int clamp(int v, int min, int max) {
+inline int J_Clamp(int v, int min, int max) {
 	IF_DO(v > max, return max);
 	IF_DO(v < min, return min);
 	return v;
@@ -37,6 +37,7 @@ inline const T& J_Max(const T &a, const T &b){
 /**
  * global instance :
  * */
+namespace Base{
 template<typename T>
 class InstanceHolder {
 public:
@@ -51,6 +52,7 @@ public:
 	}
 	InstancePtr &instance;
 };
+}
 
 /// declare macro
 #define J_GLOBAL_INSTANCE_DECLARE(type, name) type* name()
@@ -60,7 +62,7 @@ public:
 		if(instance == NULL){\
 			instance = new type();\
 			if(instance){\
-				static InstanceHolder<type> holder(instance); \
+				static Base::InstanceHolder<type> holder(instance); \
 			}\
 		}\
 		return instance;\

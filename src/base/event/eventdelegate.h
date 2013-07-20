@@ -1,4 +1,5 @@
-
+#ifndef __JB_EVENTDELEGATE_H_
+#define __JB_EVENTDELEGATE_H_
 #include "stdinc.h"
 #include "base/event/event.h"
 
@@ -24,7 +25,7 @@ public:
 	/// assignment constructor
 	EventDelegate& operator = (const EventDelegate& other);
 	/// override operator ==
-	bool operator == (const EventDelegate& other);
+	bool operator == (const EventDelegate& other) const;
 
 	/// default destructor
 	virtual ~EventDelegate();
@@ -34,6 +35,11 @@ public:
 	/// @param return false when the delegate is invalid
 	bool invoke(Event* evt);
 
+	/// get the selector of event
+	JSEL_EventHandler handle() const;
+	/// get the target
+	Base::EventTarget* target() const;
+
 protected:
 	/// data members
 	Base::TargetPtr<Base::EventTarget> m_target;
@@ -41,3 +47,5 @@ protected:
 };// end of EventDelegate
 
 }// end of Base
+
+#endif
