@@ -4,6 +4,7 @@
 //------------------------------------------------------------------------------
 #include "stdneb.h"
 #include "core/refcounted.h"
+#include "core/weakptr.h"
 
 namespace Core
 {
@@ -22,6 +23,9 @@ RefCountedList RefCounted::list;
 */
 RefCounted::~RefCounted()
 {
+    // release weakptr
+    THolderCenter<RefCounted>::Instance()->destroyHolder(this);
+
     n_assert(0 == this->refCount);
     #if NEBULA3_DEBUG
         n_assert(!this->destroyed);
