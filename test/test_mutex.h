@@ -2,8 +2,8 @@
 
 TEST(Mutex, lockAndUnlock){
     Base::ThreadMutex mutex;
-    mutex.lock();
-    mutex.unlock();
+    mutex.Lock();
+    mutex.Unlock();
 }
 
 TEST(AutoLock, autoLock){

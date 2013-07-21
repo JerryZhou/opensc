@@ -3,28 +3,28 @@
 #include "base/event/eventtarget.h"
 
 namespace Base{
-class RefcountedTarget : public EventTarget{
+class Refcounted : public EventTarget{
 private:
-	/// disable copy and assign constructor
-	RefcountedTarget(const RefcountedTarget& other);
-	RefcountedTarget& operator= (const RefcountedTarget& other);
+    /// disable copy and assign constructor
+    Refcounted(const Refcounted& other);
+    Refcounted& operator= (const Refcounted& other);
 
 public:
-	/// default constructor
-	RefcountedTarget();
-	/// default destructor
-	virtual ~RefcountedTarget();
+    /// default constructor
+    Refcounted();
+    /// default destructor
+    virtual ~Refcounted();
 
-	/// reference counting, increment
-    void release(void);
+    /// reference counting, increment
+    void Release(void);
     /// reference counting, decrement
-    void retain(void);
+    void Retain(void);
 
     /// current reference count
-    int retainCount(void);
+    int RetainCount(void);
 
 protected:
-	volatile int m_refcounted;
+    volatile int refcounted;
 };
 }
 #endif

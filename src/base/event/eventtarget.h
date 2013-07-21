@@ -1,6 +1,6 @@
 #ifndef __EVENTTARGET_H_
 #define __EVENTTARGET_H_
-#include "target.h"
+#include "base/target.h"
 
 
 namespace Base{
@@ -13,7 +13,7 @@ public:
 	EventTarget();
 	virtual ~EventTarget();
 
-	virtual void onEvent(Base::Event* evt);
+	virtual void OnEvent(Base::Event* evt);
 };
 }// end of Base
 

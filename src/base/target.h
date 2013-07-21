@@ -5,29 +5,25 @@
 namespace Base{
 class Target{
 public:
-	/// default constructor
-	Target(){
-	}
-
-	/// default destructor
-	virtual ~Target(){
-		THolderCenter<Target>::Instance()->destroyHolder(this);
-	}
+    /// default constructor
+    Target();
+    /// default destructor
+    virtual ~Target();
 
 };// end of Target
 
 template<typename T>
 class TargetPtr : public WeakPtr<Base::Target, Base::Target>{
 public:
-	/// default destructor
-	TargetPtr(){
-	}
+    /// default destructor
+    TargetPtr(){
+    }
 
-	/// constructor from object ptr
-	TargetPtr(const T* ptr)
-	: WeakPtr<Base::Target, Base::Target>(ptr){
+    /// constructor from object ptr
+    TargetPtr(const T* ptr)
+    : WeakPtr<Base::Target, Base::Target>(ptr){
 
-	}
+    }
 
     /// op the target
     inline T* operator->() const {

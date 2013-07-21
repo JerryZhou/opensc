@@ -24,20 +24,20 @@ public:
  	virtual ~EventDispatch();
 
  	/// dispatch event
- 	void dispatch(Event* event);
+ 	void Dispatch(Event* event);
 
  	/// add event delegate, have not check the unique
- 	void addEventDelegate(EventId id, Base::EventTarget* target, JSEL_EventHandler jevent);
- 	void addEventDelegate(EventId id, const EventDelegate& ref);
+ 	void AddEventDelegate(EventId id, Base::EventTarget* target, JSEL_EventHandler jevent);
+ 	void AddEventDelegate(EventId id, const EventDelegate& ref);
 
  	/// remove event delegate
- 	void removeEventDelegate(EventId id, Base::EventTarget* target, JSEL_EventHandler jevent);
- 	void removeEventDelegate(EventId id, const EventDelegate& ref);
+ 	void RemoveEventDelegate(EventId id, Base::EventTarget* target, JSEL_EventHandler jevent);
+ 	void RemoveEventDelegate(EventId id, const EventDelegate& ref);
 
 protected:
  	/// data members
- 	ThreadMutex m_mutex;
- 	DelegateMap m_delegatesMap;
+ 	ThreadMutex mutex;
+ 	DelegateMap delegatesMap;
 };// end of EventDispatch
 
 J_GLOBAL_INSTANCE_DECLARE(EventDispatch, eventDispatch);

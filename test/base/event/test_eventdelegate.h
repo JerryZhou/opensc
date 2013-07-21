@@ -8,42 +8,42 @@ TEST(EventDelegate, constructor){
 
 TEST(EventDelegate, constructor_target_handle){
     EventTarget target;
-    EventDelegate delegate(&target, jevent_selector(EventTarget::onEvent));
-    EXPECT_EQ(delegate.target(), &target);
-    EXPECT_EQ(delegate.handle(), jevent_selector(EventTarget::onEvent));
+    EventDelegate delegate(&target, jevent_selector(EventTarget::OnEvent));
+    EXPECT_EQ(delegate.Target(), &target);
+    EXPECT_EQ(delegate.Handle(), jevent_selector(EventTarget::OnEvent));
 }
 
 TEST(EventDelegate, constructor_copy){
     EventTarget target;
-    EventDelegate delegate(&target, jevent_selector(EventTarget::onEvent));
+    EventDelegate delegate(&target, jevent_selector(EventTarget::OnEvent));
     EventDelegate delegatecopy(delegate);
     EXPECT_EQ(delegate, delegatecopy);
 
-    EXPECT_EQ(delegatecopy.target(), &target);
-    EXPECT_EQ(delegatecopy.handle(), jevent_selector(EventTarget::onEvent));
+    EXPECT_EQ(delegatecopy.Target(), &target);
+    EXPECT_EQ(delegatecopy.Handle(), jevent_selector(EventTarget::OnEvent));
 }
 
 TEST(EventDelegate, constructor_assign){
     EventTarget target;
-    EventDelegate delegate(&target, jevent_selector(EventTarget::onEvent));
+    EventDelegate delegate(&target, jevent_selector(EventTarget::OnEvent));
 
     EventDelegate delegatecopy;
-    EXPECT_TRUE(delegatecopy.target() == NULL);
-    EXPECT_TRUE(delegatecopy.handle() == NULL);
+    EXPECT_TRUE(delegatecopy.Target() == NULL);
+    EXPECT_TRUE(delegatecopy.Handle() == NULL);
 
     delegatecopy = delegate;
     EXPECT_EQ(delegate, delegatecopy);
 
-    EXPECT_EQ(delegatecopy.target(), &target);
-    EXPECT_EQ(delegatecopy.handle(), jevent_selector(EventTarget::onEvent));
+    EXPECT_EQ(delegatecopy.Target(), &target);
+    EXPECT_EQ(delegatecopy.Handle(), jevent_selector(EventTarget::OnEvent));
 }
 
 TEST(EventDelegate, invoke){
     EventTarget target;
 
-    EventDelegate delegate(&target, jevent_selector(EventTarget::onEvent));
-    delegate.invoke(NULL);
+    EventDelegate delegate(&target, jevent_selector(EventTarget::OnEvent));
+    delegate.Invoke(NULL);
 
     EventDelegate delegatecopy;
-    delegatecopy.invoke(NULL);
+    delegatecopy.Invoke(NULL);
 }

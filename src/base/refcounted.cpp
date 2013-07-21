@@ -1,33 +1,33 @@
-#include "refcountedtarget.h"
+#include "refcounted.h"
 
 namespace Base{
 
 /// default constructor
-RefcountedTarget::RefcountedTarget()
-: m_refcounted(1){
-
+Refcounted::Refcounted()
+: refcounted(0){
 }
 
 /// default destructor
-RefcountedTarget::~RefcountedTarget(){
-
+Refcounted::~Refcounted(){
+    J_ASSERT2(this->refcounted == 0, 
+	    "Refcounted::~Refcounted() refcounted %d != 0", this->refcounted);
 }
 
 /// reference counting, increment
-void RefcountedTarget::release(void){
-	if(Base::Interlocked::decrement(m_refcounted) == 0){
+void Refcounted::Release(void){
+	if(Base::Interlocked::Decrement(this->refcounted) == 0){
 		delete this;
 	}
 }
 
 /// reference counting, decrement
-void RefcountedTarget::retain(void){
-	Base::Interlocked::increment(m_refcounted);
+void Refcounted::Retain(void){
+	Base::Interlocked::Increment(this->refcounted);
 }
 
 /// current reference count
-int RefcountedTarget::retainCount(void){
-	return m_refcounted;
+int Refcounted::RetainCount(void){
+	return this->refcounted;
 }
 
 }

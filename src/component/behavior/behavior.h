@@ -1,6 +1,6 @@
 #ifndef __JB_BEHAVIOR_H_
 #define __JB_BEHAVIOR_H_
-#include "target.h"
+#include "base/target.h"
 
 namespace Component{
 //declare classes

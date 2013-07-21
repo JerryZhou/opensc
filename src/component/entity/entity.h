@@ -1,10 +1,10 @@
 #ifndef __JB_ENTITY_H_
 #define __JB_ENTITY_H_
 #include "stdinc.h"
-#include "base/refcountedtarget.h"
+#include "base/refcounted.h"
 
 namespace Component{
-class Entity : public Base::RefcountedTarget{
+class Entity : public Base::Refcounted{
 public:
 	/// default constructor
 	Entity();

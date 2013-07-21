@@ -10,15 +10,13 @@ namespace Base{
 class EventTarget;
 
 ///---------------------------------------------------------------------------------
-/// event delegate: strong reference
-/// NB! STRONG REFERENCE
-/// TODO: use weakference
+/// event delegate: weak reference
 class EventDelegate{
 public:
 	/// default constructor
 	EventDelegate();
 	/// construtor from target and handle
-	EventDelegate(Base::EventTarget* target, JSEL_EventHandler handle);
+	EventDelegate(Base::EventTarget* t, JSEL_EventHandler h);
 
 	/// copy constructor
 	EventDelegate(const EventDelegate& other);
@@ -33,17 +31,17 @@ public:
 	/// invoke the target event handle
 	/// @param return true when the delegate is valid
 	/// @param return false when the delegate is invalid
-	bool invoke(Event* evt);
+	bool Invoke(Event* evt);
 
 	/// get the selector of event
-	JSEL_EventHandler handle() const;
+	JSEL_EventHandler Handle() const;
 	/// get the target
-	Base::EventTarget* target() const;
+	Base::EventTarget* Target() const;
 
 protected:
 	/// data members
-	Base::TargetPtr<Base::EventTarget> m_target;
-	JSEL_EventHandler m_handle;
+	Base::TargetPtr<Base::EventTarget> target;
+	JSEL_EventHandler handle;
 };// end of EventDelegate
 
 }// end of Base

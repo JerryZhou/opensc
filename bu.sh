@@ -7,6 +7,7 @@ function build_proj_cmd()
 {
     echo "------------------begin build----------------------------------------------------"
     if [ "$2" == "c" ]; then
+	echo "clean project"
 	make clean -f $1
     else
 	make -f $1

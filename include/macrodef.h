@@ -4,10 +4,24 @@
 #include "interlocked.h"
 #include "mutex.h"
 
+#define OPENSC_DEBUG (1)
+
+#define OPENSC_UNUSED_ATTR
+
 #define IF_DO(con, doit ) do { if(con) { doit; } }while(false)
 #define IF_DO_THEN_DO(con, doit, thendoit ) do { if(con) { doit; } else { thendoit; } }while(false)
 
 #define J_ASSERT(con) assert(con)
+
+#define J_ASSERT2(con, ...) do {\
+    if(!(con)) { \
+	Base::__sc_log_print(Base::SC_LOG_FATAL, JE_LOG_TAG, __VA_ARGS__); \
+	assert(false); \
+    } }while(false)
+
+#define J_SafeRelease(t) do { if(t) { t->Release(); t = NULL; } }while(false)
+
+#define J_SafeRetain(t) do { if(t) { t->Retain(); } }while(false)
 
 /**
  * clamp the v to [min, max]

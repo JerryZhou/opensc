@@ -9,7 +9,7 @@ TEST(EventTarget, constructor){
 
 TEST(EventTarget, selector){
     EventTarget target;
-    JSEL_EventHandler h = jevent_selector(EventTarget::onEvent);
+    JSEL_EventHandler h = jevent_selector(EventTarget::OnEvent);
     EventTarget *pTarget = &target;
     (pTarget->*(h))(NULL);
 }

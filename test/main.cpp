@@ -13,10 +13,10 @@ using ::testing::UnitTest;
 
 #include "test_macrodef.h"
 #include "test_mutex.h"
-#include "test_target.h"
 
 #include "base/test_log.h"
-#include "base/test_refcountedtarget.h"
+#include "base/test_target.h"
+#include "base/test_refcounted.h"
 #include "base/event/test_event.h"
 #include "base/event/test_eventtarget.h"
 #include "base/event/test_eventdelegate.h"

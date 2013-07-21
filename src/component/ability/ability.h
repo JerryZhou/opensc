@@ -1,6 +1,6 @@
 #ifndef __JB_ABILITY_H_
 #define __JB_ABILITY_H_
-#include "target.h"
+#include "base/target.h"
 
 namespace Component{
 //declare classes

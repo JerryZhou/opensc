@@ -11,7 +11,7 @@ EventTarget::~EventTarget(){
 
 }
 
-void EventTarget::onEvent(Base::Event* evt){
+void EventTarget::OnEvent(Base::Event* evt){
 
 }
 

@@ -1,8 +1,8 @@
-#include "base/refcountedtarget.h"
+#include "base/refcounted.h"
 
 using namespace Base;
 
-TEST(RefcountedTarget, constructor){
-    RefcountedTarget target;
-    EXPECT_EQ(target.retainCount(), 1);
+TEST(Refcounted, constructor){
+    Refcounted target;
+    EXPECT_EQ(target.RetainCount(), 0);
 }

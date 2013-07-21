@@ -12,7 +12,7 @@ EventDispatch::~EventDispatch(){
 }
 
 /// dispatch event
-void EventDispatch::dispatch(Event* evt){
+void EventDispatch::Dispatch(Event* evt){
 	DelegateList target;
 	// find target
 	do{
@@ -41,12 +41,12 @@ void EventDispatch::dispatch(Event* evt){
 }
 
 /// add delegate
-void EventDispatch::addEventDelegate(EventId id, Base::EventTarget* target, JSEL_EventHandler jevent){
-	addEventDelegate(id, EventDelegate(target, jevent));
+void EventDispatch::AddEventDelegate(EventId id, Base::EventTarget* target, JSEL_EventHandler jevent){
+	AddEventDelegate(id, EventDelegate(target, jevent));
 }
 
 /// add delegate
-void EventDispatch::addEventDelegate(EventId id, const EventDelegate& ref){
+void EventDispatch::AddEventDelegate(EventId id, const EventDelegate& ref){
 	AutoLock lock(m_mutex);
 
 	DelegateMapIte ite = m_delegatesMap.find(id);
@@ -56,17 +56,17 @@ void EventDispatch::addEventDelegate(EventId id, const EventDelegate& ref){
 	}else{
 		m_delegatesMap[id].push_back(ref);
 		// add event
-		// add_event_from_jni(id);
+		// TODO: add event from other source, like from system input event
 	}
 }
 
 /// remove delegate
-void EventDispatch::removeEventDelegate(EventId id, Base::EventTarget* target, JSEL_EventHandler jevent){
-	removeEventDelegate(id, EventDelegate(target, jevent));
+void EventDispatch::RemoveEventDelegate(EventId id, Base::EventTarget* target, JSEL_EventHandler jevent){
+	RemoveEventDelegate(id, EventDelegate(target, jevent));
 }
 
 /// remove delegate
-void EventDispatch::removeEventDelegate(EventId id, const EventDelegate& ref){
+void EventDispatch::RemoveEventDelegate(EventId id, const EventDelegate& ref){
 	AutoLock lock(m_mutex);
 
 	DelegateMapIte ite = m_delegatesMap.find(id);
@@ -75,9 +75,7 @@ void EventDispatch::removeEventDelegate(EventId id, const EventDelegate& ref){
 		// we have override operator == for EventDelegate
 		list.remove(ref);
 		// remove event
-		//if(list.empty()){
-		//	remove_event_from_jni(id);
-		//}
+		// TOOD: when list.empty() , remove from other source
 	}
 }
 
