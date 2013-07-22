@@ -4,6 +4,7 @@ namespace Component {
 
 /// redefine the enum macros
 #undef JEnumBegin
+#undef JEnumBeginWith
 #undef JEnumValueWith
 #undef JEnumValue
 #undef JEnumEnd
@@ -14,7 +15,7 @@ namespace Component {
     void TemplateEnum<NameSpace::Enum>::Setup(){\
     using namespace NameSpace;\
     name = #Enum;
-    
+#define JEnumBeginWith(NameSpace, Enum, TYPE) JEnumBegin(NameSpace, Enum)
 #define JEnumValueWith(Enum, n, i) Add(#n, Enum##_##n);
 #define JEnumValue(Enum, n) Add(#n, Enum##_##n);
 #define JEnumEnd(NameSpace, Enum) }
@@ -22,10 +23,12 @@ namespace Component {
 
 /// add
 #undef JEnumBegin
+#undef JEnumBeginWith
 #undef JEnumValueWith
 #undef JEnumValue
 #undef JEnumEnd
 #define JEnumBegin(NameSpace, Enum) TemplateEnum< NameSpace::Enum >::Setup();
+#define JEnumBeginWith(NameSpace, Enum, TYPE) JEnumBegin(NameSpace, Enum)
 #define JEnumValueWith(Enum, n, i)
 #define JEnumValue(Enum, n)
 #define JEnumEnd(NameSpace, Enum)

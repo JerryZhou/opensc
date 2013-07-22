@@ -45,12 +45,15 @@ set(J_COMPONENT_TEMPLATE_SRCS
     ${J_SRC_DIR}/component/template/templatecontainer.cpp
     ${J_SRC_DIR}/component/template/templateenum.h
     ${J_SRC_DIR}/component/template/templateenum.cpp
+    ${J_SRC_DIR}/component/template/templateclass.h
+    ${J_SRC_DIR}/component/template/templateclass.cpp
 )
 source_group(component\\template FILES ${J_COMPONENT_TEMPLATE_SRCS})
 
 set(J_COMPONENT_TEMPLATE_RECORD_SRCS
     ${J_SRC_DIR}/component/template/record/recordenum.h
     ${J_SRC_DIR}/component/template/record/recordflag.h
+    ${J_SRC_DIR}/component/template/record/recordclass.h
 )
 source_group(component\\template\\record FILES ${J_COMPONENT_TEMPLATE_RECORD_SRCS})
 

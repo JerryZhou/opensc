@@ -73,6 +73,7 @@ void SetupEnums();
 
 /// define nums
 #define JEnumBegin(NS, Enum) namespace NS { enum Enum{
+#define JEnumBeginWith(NS, Enum, TYPE) namespace NS { enum Enum : TYPE {
 #define JEnumValueWith(Enum, n, i) Enum##_##n = i,
 #define JEnumValue(Enum, n) Enum##_##n,
 #define JEnumEnd(NS, Enum) Enum##_Count, }; }\
