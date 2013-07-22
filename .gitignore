@@ -2,3 +2,6 @@
 
 *.o
 *.cpp.d
+bin
+build
+cmake
