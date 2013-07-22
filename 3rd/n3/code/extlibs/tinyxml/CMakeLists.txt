@@ -11,7 +11,7 @@ set(TINY_XML_SRCS
   ${CMAKE_CURRENT_SOURCE_DIR}/tinyxmlparser.cc
 )
 
-include_directories(${CMAKE_SOURCE_DIR}/code/foundation)
-include_directories(${CMAKE_SOURCE_DIR}/code/extlibs)
+include_directories(${N3_DIR}/code/foundation)
+include_directories(${N3_DIR}/code/extlibs)
 add_library(tinyxml STATIC ${TINY_XML_SRCS})
 set_target_properties(tinyxml PROPERTIES FOLDER extlibs)

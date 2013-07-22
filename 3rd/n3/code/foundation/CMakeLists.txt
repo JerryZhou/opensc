@@ -1,8 +1,10 @@
 cmake_minimum_required (VERSION 2.8)
 
-include_directories(${CMAKE_SOURCE_DIR}/code/extlibs)
+set(N3_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../)
 
-set(N3_FOUNDATION_SRC_DIR ${CMAKE_SOURCE_DIR}/code/foundation)
+include_directories(${N3_DIR}/code/extlibs)
+
+set(N3_FOUNDATION_SRC_DIR ${N3_DIR}/code/foundation)
 include_directories(${N3_FOUNDATION_SRC_DIR})
 
 set(N3_FOUNDATION_APP_SRCS

@@ -27,8 +27,8 @@ if(MSVC)
     include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 endif()
 
-include_directories(${CMAKE_SOURCE_DIR}/code/foundation)
-include_directories(${CMAKE_SOURCE_DIR}/code/extlibs)
+include_directories(${N3_DIR}/code/foundation)
+include_directories(${N3_DIR}/code/extlibs)
 
 
 #============================================================================

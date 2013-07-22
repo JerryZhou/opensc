@@ -4,8 +4,6 @@
 #include "stdneb.h"
 #include "base/target.h"
 
-
-
 namespace Base{
 //---------------------------------------------------------------------------------
 class Event;

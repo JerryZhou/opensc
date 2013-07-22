@@ -1,4 +1,5 @@
 #include "eventdispatch.h"
+#include "threading/autolock.h"
 
 using namespace Threading;
 using namespace Util;
@@ -18,10 +19,10 @@ void EventDispatch::Dispatch(Ptr<Event> &evt){
 	DelegateList target;
 	// find target
 	do{
-		AutoLock lock(mutex);
+		AutoLock lock(this->mutex);
 
 		IndexT idx = this->delegatesMap.FindIndex(&(evt->GetId()));
-		if(ite != InvalidIndex){
+		if(idx != InvalidIndex){
 			target = this->delegatesMap.ValueAtIndex(idx);
 		}
 	}while(false);
@@ -30,7 +31,7 @@ void EventDispatch::Dispatch(Ptr<Event> &evt){
 	DelegateList toRemoved;
 	if(!target.IsEmpty()) do{
 		EventDelegate& ref = target.Back();
-		if(!ref.invoke(evt)){
+		if(!ref.Invoke(evt)){
 			toRemoved.Append(ref);
 		}
 		target.EraseIndexSwap(target.Size() - 1);
@@ -39,7 +40,7 @@ void EventDispatch::Dispatch(Ptr<Event> &evt){
 	// remmove invalid delegates
 	if(!toRemoved.IsEmpty()) do{
 		EventDelegate& ref = toRemoved.Back();
-		removeEventDelegate(evt->id, ref);
+		RemoveEventDelegate(evt->GetId(), ref);
         toRemoved.EraseIndexSwap(toRemoved.Size() - 1);
 	}while(!toRemoved.IsEmpty());
 }
@@ -51,7 +52,7 @@ void EventDispatch::AddEventDelegate(const EventId &id, Base::EventTarget* targe
 
 /// add delegate
 void EventDispatch::AddEventDelegate(const EventId &id, const EventDelegate& ref){
-	AutoLock lock(m_mutex);
+	AutoLock lock(this->mutex);
 
 	IndexT idx = this->delegatesMap.FindIndex(&id);
 	if(idx != InvalidIndex){
@@ -60,7 +61,7 @@ void EventDispatch::AddEventDelegate(const EventId &id, const EventDelegate& ref
 	}else{
         DelegateList list;
         list.Append(ref);
-		m_delegatesMap.Add(&id, list);
+		this->delegatesMap.Add(&id, list);
 		// add event
 		// TODO: add event from other source, like from system input event
 	}

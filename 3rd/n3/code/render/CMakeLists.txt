@@ -1,11 +1,11 @@
 cmake_minimum_required (VERSION 2.8)
 
-set(N3_RENDER_SRC_DIR ${CMAKE_SOURCE_DIR}/code/render)
+set(N3_RENDER_SRC_DIR ${N3_DIR}/code/render)
 include_directories(${N3_RENDER_SRC_DIR})
 
-include_directories(${CMAKE_SOURCE_DIR}/code/foundation)
-include_directories(${CMAKE_SOURCE_DIR}/code/extlibs)
-include_directories(${CMAKE_SOURCE_DIR}/code/extlibs/SOIL)
+include_directories(${N3_DIR}/code/foundation)
+include_directories(${N3_DIR}/code/extlibs)
+include_directories(${N3_DIR}/code/extlibs/SOIL)
 
 set(N3_RENDER_COREGRAPHICS_SRCS
   ${N3_RENDER_SRC_DIR}/coregraphics/displaydevice.h

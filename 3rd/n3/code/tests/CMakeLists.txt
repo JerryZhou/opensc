@@ -9,8 +9,8 @@ if(APPLE)
   set(PLATFORM_DIR "osx")
 endif(APPLE)
 
-include_directories(${CMAKE_SOURCE_DIR}/code/foundation)
-include_directories(${CMAKE_SOURCE_DIR}/code/extlibs)
+include_directories(${N3_DIR}/code/foundation)
+include_directories(${N3_DIR}/code/extlibs)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 set(N3_TESTS_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR})
@@ -50,7 +50,7 @@ target_link_libraries(testfoundation
   testbase
 )
 set_target_properties(testfoundation PROPERTIES FOLDER tests)
-set_target_properties(testfoundation PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin/${PLATFORM_DIR})
+set_target_properties(testfoundation PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${N3_DIR}/bin/${PLATFORM_DIR})
 
 #
 # Math Tests
@@ -84,4 +84,4 @@ set(N3_MATHTEST_SRCS
 #  testbase
 #)
 #set_target_properties(mathtest PROPERTIES FOLDER tests)
-#set_target_properties(mathtest PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin/${PLATFORM_DIR})
+#set_target_properties(mathtest PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${N3_DIR}/bin/${PLATFORM_DIR})

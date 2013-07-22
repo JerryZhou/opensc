@@ -1,11 +1,14 @@
 #include "entity.h"
+#include "threading/interlocked.h"
 
 namespace Component{
 
+__ImplementClass(Component::Entity, 'enty', Base::EventTarget);
+
 /// unique id generater
 static int unique_id(){
-	static volatile int s_id_pool = 0;
-	return Base::Interlocked::increment(s_id_pool);
+    static volatile int s_id_pool = 0;
+    return Threading::Interlocked::Increment(s_id_pool);
 }
 
 /// unique id recycle
@@ -21,11 +24,11 @@ Entity::Entity()
 
 /// default destructor
 Entity::~Entity(){
-	recycle_id(m_id);
+    recycle_id(m_id);
 }
 
 /// unique id
 int Entity::id() const{
-	return m_id;
+    return m_id;
 }
 }// end of Component

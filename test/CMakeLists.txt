@@ -31,10 +31,10 @@ add_executable(jtest
 )
 target_link_libraries(jtest 
     opensc 
+    foundation
+    zlib
+    tinyxml
     ${CMAKE_SOURCE_DIR}/3rd/googletest/lib/gtest_main.a 
-    ${CMAKE_SOURCE_DIR}/3rd/n3/lib/libfoundation.a 
-    ${CMAKE_SOURCE_DIR}/3rd/n3/lib/libz.a 
-    ${CMAKE_SOURCE_DIR}/3rd/n3/lib/libtinyxml.a
 )
 
 # out put library

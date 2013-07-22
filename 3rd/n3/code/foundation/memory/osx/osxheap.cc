@@ -215,7 +215,7 @@ OSXHeap::ValidateAllHeaps()
 void
 OSXHeap::DumpLeaks()
 {
-    Core::SysFunc::Error("OSXHeap::DumpLeaks() not implemented!\n");
+    //Core::SysFunc::Error("OSXHeap::DumpLeaks() not implemented!\n");
 }
 
 //------------------------------------------------------------------------------

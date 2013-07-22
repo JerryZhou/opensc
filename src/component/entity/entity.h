@@ -1,21 +1,23 @@
 #ifndef __JB_ENTITY_H_
 #define __JB_ENTITY_H_
+
 #include "stdinc.h"
-#include "base/refcounted.h"
+#include "base/event/eventtarget.h"
 
 namespace Component{
-class Entity : public Base::Refcounted{
+class Entity : public Base::EventTarget{
+    __DeclareClass(Entity);
 public:
-	/// default constructor
-	Entity();
-	/// default destructor
-	virtual ~Entity();
+    /// default constructor
+    Entity();
+    /// default destructor
+    virtual ~Entity();
 
-	/// unique id
-	int id() const;
+    /// unique id
+    int id() const;
 
 protected:
-	int m_id;
+    int m_id;
 };// end of Entity
 
 }// end of Entity

@@ -1,9 +1,6 @@
 #ifndef __MACRODEF_H_
 #define __MACRODEF_H_
 
-#include "interlocked.h"
-#include "mutex.h"
-
 #define OPENSC_DEBUG (1)
 
 #define OPENSC_UNUSED_ATTR

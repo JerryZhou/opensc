@@ -17,18 +17,41 @@ set(J_BASE_SRCS
     ${J_SRC_DIR}/base/log.cpp
     ${J_SRC_DIR}/base/target.h
     ${J_SRC_DIR}/base/target.cpp
+)
+source_group(base FILES ${J_BASE_SRCS})
+
+set(J_BASE_EVENT_SRCS
     ${J_SRC_DIR}/base/event/event.h
     ${J_SRC_DIR}/base/event/event.cpp
     ${J_SRC_DIR}/base/event/eventtarget.h
     ${J_SRC_DIR}/base/event/eventtarget.cpp
     ${J_SRC_DIR}/base/event/eventdelegate.h
     ${J_SRC_DIR}/base/event/eventdelegate.cpp
+    ${J_SRC_DIR}/base/event/eventdispatch.h
+    ${J_SRC_DIR}/base/event/eventdispatch.cpp
 )
-source_group(base FILES ${J_BASE_SRCS})
+source_group(base\\event FILES ${J_BASE_EVENT_SRCS})
+
+set(J_COMPONENT_ENTITY_SRCS
+    ${J_SRC_DIR}/component/entity/entity.h
+    ${J_SRC_DIR}/component/entity/entity.cpp
+)
+source_group(component\\entity FILES ${J_COMPONENT_ENTITY_SRCS})
+
+set(J_COMPONENT_TEMPLATE_SRCS
+    ${J_SRC_DIR}/component/template/templaterecord.h
+    ${J_SRC_DIR}/component/template/templaterecord.cpp
+    ${J_SRC_DIR}/component/template/templatecontainer.h
+    ${J_SRC_DIR}/component/template/templatecontainer.cpp
+)
+source_group(component\\template FILES ${J_COMPONENT_TEMPLATE_SRCS})
 
 # static library
 add_library(opensc STATIC
     ${J_BASE_SRCS}
+    ${J_BASE_EVENT_SRCS}
+    ${J_COMPONENT_ENTITY_SRCS}
+    ${J_COMPONENT_TEMPLATE_SRCS}
 )
 
 # out put library

@@ -18,9 +18,9 @@ using ::testing::TestPartResult;
 using ::testing::UnitTest;
 
 #include "test_event.h"
-//#include "test_eventdelegate.h"
-//#include "test_eventdispatch.h"
-//#include "test_eventtarget.h"
+#include "test_eventdelegate.h"
+#include "test_eventdispatch.h"
+#include "test_eventtarget.h"
 #include "test_log.h"
 #include "test_macrodef.h"
 #include "test_target.h"
@@ -65,9 +65,11 @@ OpenSCApplication::Run() {
     n_assert(this->isOpen);
 
     int argc = 0;
-    char *argv[] = {""};
+    char *argv[] = {
+        (char*)(""),
+    };
     InitGoogleTest(&argc, argv);
-    RUN_ALL_TESTS();
+    (void)(RUN_ALL_TESTS());
 }
 
 }// end of App

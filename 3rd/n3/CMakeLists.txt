@@ -8,7 +8,8 @@ message("CMAKE_BUILD_TYPE is ${CMAKE_BUILD_TYPE}")
 message("CMAKE_SOURCE_DIR is ${CMAKE_SOURCE_DIR}")
 
 # no harm in adding the include dir in all platforms
-include_directories(${CMAKE_SOURCE_DIR}/code/extlibs/glfw/include)
+set(N3_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+include_directories(${N3_DIR}/code/extlibs/glfw/include)
 
 add_subdirectory(code/foundation)
 add_subdirectory(code/render)

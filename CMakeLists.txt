@@ -11,3 +11,4 @@ include_directories(${CMAKE_SOURCE_DIR}/3rd/n3/code/extlibs/glfw/include)
 
 add_subdirectory(src/)
 add_subdirectory(test/)
+add_subdirectory(3rd/n3/)

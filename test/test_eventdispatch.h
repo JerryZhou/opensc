@@ -22,7 +22,7 @@ public:
 	m_count++;
     }
 
-    virtual void onEvent(Base::Event *evt){
+    void hOnEvent(Base::Event *evt){
 	m_count++;
 	m_count++;
     }
@@ -58,7 +58,7 @@ TEST(EventDispatch, dispatch){
 	    jevent_selector(__test_EventTarget::handleEvent));
 
     eventDispatch()->AddEventDelegate(Event::Id, evtTarget, 
-	    jevent_selector(EventTarget::OnEvent));
+	    jevent_selector(__test_EventTarget::hOnEvent));
 
     EXPECT_EQ(evtTarget->m_count, 0);
 
@@ -67,7 +67,7 @@ TEST(EventDispatch, dispatch){
     EXPECT_EQ(evtTarget->m_count, 3);
 
     eventDispatch()->RemoveEventDelegate(Event::Id, evtTarget, 
-	    jevent_selector(EventTarget::OnEvent));
+	    jevent_selector(__test_EventTarget::hOnEvent));
 
     eventDispatch()->Dispatch(evt);
 

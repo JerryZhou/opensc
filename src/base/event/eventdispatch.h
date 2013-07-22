@@ -13,7 +13,7 @@ class EventDispatch {
 public:
 	/// type binding
  	typedef Util::Array<Base::EventDelegate> DelegateList;
- 	typedef Util::Dictionary<EventId*, DelegateList > DelegateMap;
+ 	typedef Util::Dictionary<const EventId*, DelegateList > DelegateMap;
 
 	/// default constructor
  	EventDispatch();
