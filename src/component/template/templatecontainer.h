@@ -1,9 +1,14 @@
 #ifndef __JB_TEMPLATECONTAINER_H_
 #define __JB_TEMPLATECONTAINER_H_
 #include "stdinc.h"
-#include "eventtarget.h"
+#include "util/stringatom.h"
+#include "util/dictionary.h"
+#include "base/event/eventtarget.h"
 
 namespace Component{
+/// record
+struct TemplateRecord;
+/// continer
 class TemplateContainer : public Base::EventTarget{
     __DeclareClass(TemplateContainer);
 public:
@@ -19,5 +24,6 @@ public:
 
 private:
     Util::Dictionary<const Util::StringAtom, const TemplateRecord*> records;
+};
 }
 #endif

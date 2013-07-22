@@ -20,6 +20,9 @@
 
 #define J_SafeRetain(t) do { if(t) { t->Retain(); } }while(false)
 
+#define J_Name(TYPE) #TYPE
+#define J_DeclareName(TYPE) Util::StringAtom name;
+
 /**
  * clamp the v to [min, max]
  * */

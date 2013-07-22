@@ -7,6 +7,7 @@
 #include "io/iointerface.h"
 #include "openscapplication.h"
 #include "base/log.h"
+#include "component/template/templateenum.h"
 
 using ::testing::EmptyTestEventListener;
 using ::testing::InitGoogleTest;
@@ -64,6 +65,9 @@ void
 OpenSCApplication::Run() {
     n_assert(this->isOpen);
 
+    /// setup enums
+    Component::SetupEnums();
+    
     int argc = 0;
     char *argv[] = {
         (char*)(""),

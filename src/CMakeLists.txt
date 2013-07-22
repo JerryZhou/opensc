@@ -43,8 +43,16 @@ set(J_COMPONENT_TEMPLATE_SRCS
     ${J_SRC_DIR}/component/template/templaterecord.cpp
     ${J_SRC_DIR}/component/template/templatecontainer.h
     ${J_SRC_DIR}/component/template/templatecontainer.cpp
+    ${J_SRC_DIR}/component/template/templateenum.h
+    ${J_SRC_DIR}/component/template/templateenum.cpp
 )
 source_group(component\\template FILES ${J_COMPONENT_TEMPLATE_SRCS})
+
+set(J_COMPONENT_TEMPLATE_RECORD_SRCS
+    ${J_SRC_DIR}/component/template/record/recordenum.h
+    ${J_SRC_DIR}/component/template/record/recordflag.h
+)
+source_group(component\\template\\record FILES ${J_COMPONENT_TEMPLATE_RECORD_SRCS})
 
 # static library
 add_library(opensc STATIC
@@ -52,6 +60,7 @@ add_library(opensc STATIC
     ${J_BASE_EVENT_SRCS}
     ${J_COMPONENT_ENTITY_SRCS}
     ${J_COMPONENT_TEMPLATE_SRCS}
+    ${J_COMPONENT_TEMPLATE_RECORD_SRCS}
 )
 
 # out put library
