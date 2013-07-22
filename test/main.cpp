@@ -1,5 +1,6 @@
 #include "stdneb.h"
 #include "openscapplication.h"
+#include "base/log.h"
 
 ImplementNebulaApplication();
 

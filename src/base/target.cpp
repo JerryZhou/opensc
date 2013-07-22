@@ -3,7 +3,7 @@
 
 namespace Base{
 
-__ImplementClass(Base::Target, 'CORS', Core::RefCounted);
+__ImplementClass(Base::Target, 'tagt', Core::RefCounted);
 
 /// default constructor
 Target::Target(){

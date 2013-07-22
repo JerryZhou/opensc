@@ -9,7 +9,7 @@ EventDelegate::EventDelegate()
 }
 
 /// construtor from target and handle
-EventDelegate::EventDelegate(Base::EventTarget* h, JSEL_EventHandler h)
+EventDelegate::EventDelegate(Base::EventTarget* t, JSEL_EventHandler h)
 : target(t), handle(h){
 }
 
@@ -29,6 +29,8 @@ EventDelegate& EventDelegate::operator = (const EventDelegate& other){
 	this->target = other.target;
 	// take the same handle address
 	this->handle = other.handle;
+    
+    return *this;
 }
 
 /// override operator ==
@@ -49,7 +51,7 @@ EventDelegate::~EventDelegate(){
 /// invoke the target event handle
 /// @param return true when the delegate is valid
 /// @param return false when the delegate is invalid
-bool EventDelegate::Invoke(Event* evt){
+bool EventDelegate::Invoke(Ptr<Event> &evt){
 	if(this->target.lock() && this->handle != NULL){
 		(this->target->*(this->handle))(evt);
 		this->target.unlock();

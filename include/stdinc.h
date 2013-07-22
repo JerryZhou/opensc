@@ -18,11 +18,9 @@
 #include <map>
 
 /// self include
-#include "mutex.h"
-#include "interlocked.h"
 #include "macrodef.h"
 
-/// thead safe list
-#include "concurrentlist.h"
+#include "stdneb.h"
+
 
 #endif

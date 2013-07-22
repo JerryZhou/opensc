@@ -1,6 +1,7 @@
 #ifndef __TARGET_H_
 #define __TARGET_H_
 #include "core/refcounted.h"
+#include "core/ptr.h"
 
 namespace Base{
 class Target : public Core::RefCounted{

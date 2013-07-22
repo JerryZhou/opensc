@@ -169,7 +169,7 @@ public:
 	} else {
 	    HPtr h = allocHPtr();
 	    h->setT(p);
-	    holderMap[p] = h;
+	    holderMap.Add(p, h);
 	    return h;
 	}
     }

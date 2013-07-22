@@ -36,8 +36,8 @@ int __sc_log_write(int prio, const char *tag, const char *text){
     gettimeofday(&tv, NULL);
     tm=localtime(&tv.tv_sec);
 
-    return printf("%s%d:%02d:%02d %d \t %s \t %s\n", __sc_colors[prio],
-	    tm->tm_hour, tm->tm_min, tm->tm_sec, tv.tv_usec, tag, text);
+    return printf("%s%d:%02d:%02d %d \t %s \t %s%s\n", __sc_colors[prio],
+	    tm->tm_hour, tm->tm_min, tm->tm_sec, tv.tv_usec, tag, text, __sc_colors[0]);
 }
 
 /*

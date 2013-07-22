@@ -3,6 +3,8 @@
 
 #include "stdinc.h"
 #include "base/event/eventdelegate.h"
+#include "util/array.h"
+#include "util/dictionary.h"
 
 namespace Base{
 
@@ -10,13 +12,8 @@ namespace Base{
 class EventDispatch {
 public:
 	/// type binding
- 	typedef std::list<Base::EventDelegate> DelegateList;
- 	typedef DelegateList::iterator DelegateIte;
- 	typedef DelegateList::const_iterator DelegateConstIte;
-
- 	typedef std::map<EventId, DelegateList > DelegateMap;
- 	typedef DelegateMap::iterator DelegateMapIte;
- 	typedef DelegateMap::const_iterator DelegateMapConstIte;
+ 	typedef Util::Array<Base::EventDelegate> DelegateList;
+ 	typedef Util::Dictionary<EventId*, DelegateList > DelegateMap;
 
 	/// default constructor
  	EventDispatch();
@@ -24,19 +21,21 @@ public:
  	virtual ~EventDispatch();
 
  	/// dispatch event
- 	void Dispatch(Event* event);
+ 	void Dispatch(Ptr<Event> &event);
 
  	/// add event delegate, have not check the unique
- 	void AddEventDelegate(EventId id, Base::EventTarget* target, JSEL_EventHandler jevent);
- 	void AddEventDelegate(EventId id, const EventDelegate& ref);
+ 	void AddEventDelegate(const EventId &id, 
+		Base::EventTarget* target, JSEL_EventHandler jevent);
+ 	void AddEventDelegate(const EventId &id, const EventDelegate& ref);
 
  	/// remove event delegate
- 	void RemoveEventDelegate(EventId id, Base::EventTarget* target, JSEL_EventHandler jevent);
- 	void RemoveEventDelegate(EventId id, const EventDelegate& ref);
+ 	void RemoveEventDelegate(const EventId &id, 
+		Base::EventTarget* target, JSEL_EventHandler jevent);
+ 	void RemoveEventDelegate(const EventId &id, const EventDelegate& ref);
 
 protected:
  	/// data members
- 	ThreadMutex mutex;
+	Threading::CriticalSection mutex;
  	DelegateMap delegatesMap;
 };// end of EventDispatch
 

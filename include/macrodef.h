@@ -48,38 +48,4 @@ inline const T& J_Max(const T &a, const T &b){
 #define __countof(array) (sizeof(array)/sizeof(array[0]))
 #endif
 
-/**
- * global instance :
- * */
-namespace Base{
-template<typename T>
-class InstanceHolder {
-public:
-	typedef T* InstancePtr;
-	InstanceHolder(InstancePtr& ref) :
-			instance(ref) {
-		;
-	}
-	~InstanceHolder() {
-		delete instance;
-		instance = NULL;
-	}
-	InstancePtr &instance;
-};
-}
-
-/// declare macro
-#define J_GLOBAL_INSTANCE_DECLARE(type, name) type* name()
-#define J_GLOBAL_INSTANCE(type, name) \
-	type* name(){ \
-		static type* instance = NULL;\
-		if(instance == NULL){\
-			instance = new type();\
-			if(instance){\
-				static Base::InstanceHolder<type> holder(instance); \
-			}\
-		}\
-		return instance;\
-	}
-
 #endif

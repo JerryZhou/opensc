@@ -1,33 +1,29 @@
 #ifndef __JB_EVENT_H_
 #define __JB_EVENT_H_
 
-#include "stdinc.h"
+#include "stdneb.h"
 #include "base/event/eventtarget.h"
+#include "messaging/message.h"
 
 namespace Base{
 
 /// event
-class Event{
+class Event : public Messaging::Message{
+    __DeclareClass(Event);
+    __DeclareMsgId;
 public:
     /// default constructor
-    Event()
-    : id(0)
-    , param(NULL) {
-    }
+    Event();
     /// default destructor
-    virtual ~Event(){
-    }
+    virtual ~Event();
 
 public:
-    /// data members
-    int id; // event id
-    void* param;// event params
 };// end of Event
 
-/// event id from 0
-typedef int EventId;
+/// event id
+typedef Messaging::Id EventId;
 /// event handler
-typedef void (Base::EventTarget::*JSEL_EventHandler)(Base::Event*);
+typedef void (Base::EventTarget::*JSEL_EventHandler)(Ptr<Base::Event> &evt);
 /// selector, from object-c
 #define jevent_selector(_SELECTOR) (Base::JSEL_EventHandler)(&_SELECTOR)
 
