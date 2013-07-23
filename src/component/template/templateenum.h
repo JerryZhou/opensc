@@ -72,7 +72,7 @@ public:
     
     /// get the size of enum
     static SizeT Size() {
-        return TemplateEnumThis::enum2Name.Size();
+        return TemplateEnumThis::enumNames.Size();
     }
     
     /// setup the enum
@@ -129,31 +129,20 @@ void SetupEnums();
 }// end of Component
 
 /// define nums
-#define JEnumBegin(NS, Enum) namespace NS { enum Enum{
-#define JEnumBeginWith(NS, Enum, TYPE) namespace NS { enum Enum : TYPE {
+#define JEnumBegin(NS, Enum) namespace NS { \
+    extern const char* _##Enum [];\
+    extern const SizeT _##Enum##_Size;\
+    enum Enum{
+#define JEnumBeginWith(NS, Enum, TYPE) namespace NS { \
+    extern const char* _##Enum [];\
+    extern const SizeT _##Enum##_Size;\
+    enum Enum : TYPE {
 #define JEnumValueWith(Enum, n, i) Enum##_##n = i,
 #define JEnumValue(Enum, n) Enum##_##n,
 #define JEnumEnd(NS, Enum) Enum##_Count, }; }\
     template<>\
     void Component::TemplateEnum< NS::Enum >::Setup();
 #include "component/template/record/recordenum.h"
-//#include "component/template/record/recordflag.h"
-
-/// define const datas about nums 
-#undef JEnumEnd
-#define JEnumEnd(NS, Enum) }; }\
-    template<>\
-    void Component::TemplateEnum< NS::Enum >::Setup();
 #include "component/template/record/recordflag.h"
-#undef JEnumBegin
-#undef JEnumBeginWith
-#undef JEnumValueWith
-#undef JEnumValue
-#undef JEnumEnd
-#define JEnumBegin(NS, Enum) namespace NS { enum _debug_##Enum{
-#define JEnumBeginWith(NS, Enum, TYPE) namespace NS { enum _debug_##Enum : TYPE {
-#define JEnumValueWith(Enum, n, i) _debug_##Enum##_##n,
-#define JEnumValue(Enum, n) _debug_##Enum##_##n,
-#define JEnumEnd(NS, Enum) Enum##_Count, }; }
-    #include "component/template/record/recordflag.h"
+
 #endif

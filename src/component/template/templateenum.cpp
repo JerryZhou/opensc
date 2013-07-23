@@ -1,5 +1,21 @@
 #include "templateenum.h"
 
+
+/// define const datas about nums
+#undef JEnumBegin
+#undef JEnumBeginWith
+#undef JEnumValueWith
+#undef JEnumValue
+#undef JEnumEnd
+#define JEnumBegin(NS, Enum) namespace NS { const char* _##Enum [] = {
+#define JEnumBeginWith(NS, Enum, TYPE) namespace NS { const char* _##Enum [] = {
+#define JEnumValueWith(Enum, n, i) #n ,
+#define JEnumValue(Enum, n) #n ,
+#define JEnumEnd(NS, Enum) }; \
+const SizeT _##Enum##_Size = __countof(_##Enum); }
+#include "component/template/record/recordenum.h"
+#include "component/template/record/recordflag.h"
+
 namespace Component {
 
 /// redefine the enum macros

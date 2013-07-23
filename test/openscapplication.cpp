@@ -72,7 +72,8 @@ OpenSCApplication::Run() {
     
     typedef TemplateEnum<EAbilAlignment> EnumAbliAlignment;
     SizeT numOfEAbiAlignment = EnumAbliAlignment::Size();
-    LOGE("%s: %d", EnumAbliAlignment::Name().Value(), numOfEAbiAlignment);
+    SizeT fromConstSize = Record::_EAbilAlignment_Size;
+    LOGE("%s: %d - %d ", EnumAbliAlignment::Name().Value(), numOfEAbiAlignment, fromConstSize);
     
     int argc = 0;
     char *argv[] = {

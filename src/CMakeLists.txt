@@ -54,6 +54,7 @@ set(J_COMPONENT_TEMPLATE_RECORD_SRCS
     ${J_SRC_DIR}/component/template/record/recordenum.h
     ${J_SRC_DIR}/component/template/record/recordflag.h
     ${J_SRC_DIR}/component/template/record/recordclass.h
+    ${J_SRC_DIR}/component/template/record/recordstruct.h
 )
 source_group(component\\template\\record FILES ${J_COMPONENT_TEMPLATE_RECORD_SRCS})
 
