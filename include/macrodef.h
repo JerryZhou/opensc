@@ -24,6 +24,19 @@
 #define J_DeclareName(TYPE) Util::StringAtom name;
 
 /**
+ * pow of num
+ **/
+template<typename TYPE>
+inline int J_PowOf(TYPE v){
+    int x=0;
+    while(v>1) {
+        v>>=1;
+        x++;
+    }
+    return x;
+}
+
+/**
  * clamp the v to [min, max]
  * */
 inline int J_Clamp(int v, int min, int max) {

@@ -14,10 +14,12 @@ private:
 }// end of Component
 
 /// include in record base
-#define JTemplateClass(DERIVED, BASE, NameSpace) namespace NameSpace { typedef struct _##DERIVED : public BASE {
+#define JTemplateClass(DERIVED, BASE, NameSpace) namespace NameSpace { struct DERIVED : public BASE {
+#define JTemplateStruct(DERIVED) namesace Record { struct DERIVED { 
 #define JTemplateValue(TYPE, NAME) TYPE NAME;
 #define JTemplateArray(TYPE, NAME, SIZE) Util::Array<TYPE> NAME;
-#define JTemplateEnd(DERIVED) }DERIVED; }
+#define JTemplateEnumA(TYPE, NAME, ENUM)
+#define JTemplateEnd() }; }
 #include "component/template/record/recordclass.h"
 
 #endif

@@ -29,6 +29,8 @@ using ::testing::UnitTest;
 namespace App
 {
 using namespace IO;
+using namespace Component;
+using namespace Record;
 
 //------------------------------------------------------------------------------
 /**
@@ -67,6 +69,10 @@ OpenSCApplication::Run() {
 
     /// setup enums
     Component::SetupEnums();
+    
+    typedef TemplateEnum<EAbilAlignment> EnumAbliAlignment;
+    SizeT numOfEAbiAlignment = EnumAbliAlignment::Size();
+    LOGE("%s: %d", EnumAbliAlignment::Name().Value(), numOfEAbiAlignment);
     
     int argc = 0;
     char *argv[] = {

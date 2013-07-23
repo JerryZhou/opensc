@@ -14,13 +14,22 @@ namespace Component {
     template<>\
     void TemplateEnum<NameSpace::Enum>::Setup(){\
     using namespace NameSpace;\
-    name = #Enum;
+    name = #Enum;\
+    BeginAdd();
+    
 #define JEnumBeginWith(NameSpace, Enum, TYPE) JEnumBegin(NameSpace, Enum)
-#define JEnumValueWith(Enum, n, i) Add(#n, Enum##_##n);
-#define JEnumValue(Enum, n) Add(#n, Enum##_##n);
-#define JEnumEnd(NameSpace, Enum) }
+#define JEnumValueWith(Enum, n, i) Add(#n, Enum##_##n, false);
+#define JEnumValue(Enum, n) Add(#n, Enum##_##n, false);
+#define JEnumEnd(NameSpace, Enum) EndAdd(); }
 #include "component/template/record/recordenum.h"
-
+    
+/// define the flag setup
+#undef JEnumValueWith
+#undef JEnumValue
+#define JEnumValueWith(Enum, n, i) Add(#n, Enum##_##n, true);
+#define JEnumValue(Enum, n) Add(#n, Enum##_##n, true);
+#include "component/template/record/recordflag.h"
+    
 /// add
 #undef JEnumBegin
 #undef JEnumBeginWith
@@ -35,5 +44,6 @@ namespace Component {
 
 void SetupEnums(){
 #include "component/template/record/recordenum.h"
+#include "component/template/record/recordflag.h"
 }
 }
