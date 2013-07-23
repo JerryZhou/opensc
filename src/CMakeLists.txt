@@ -47,6 +47,10 @@ set(J_COMPONENT_TEMPLATE_SRCS
     ${J_SRC_DIR}/component/template/templateenum.cpp
     ${J_SRC_DIR}/component/template/templateclass.h
     ${J_SRC_DIR}/component/template/templateclass.cpp
+    ${J_SRC_DIR}/component/template/templateinit.h
+    ${J_SRC_DIR}/component/template/templateinit.cpp
+    ${J_SRC_DIR}/component/template/templateloader.h
+    ${J_SRC_DIR}/component/template/templateloader.cpp
 )
 source_group(component\\template FILES ${J_COMPONENT_TEMPLATE_SRCS})
 

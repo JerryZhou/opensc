@@ -5,6 +5,7 @@
 #include "util/stringatom.h"
 #include "util/dictionary.h"
 #include "util/array.h"
+#include "component/template/templateinit.h"
 
 namespace Component {
 /// template enum
@@ -140,6 +141,8 @@ void SetupEnums();
 #define JEnumValueWith(Enum, n, i) Enum##_##n = i,
 #define JEnumValue(Enum, n) Enum##_##n,
 #define JEnumEnd(NS, Enum) Enum##_Count, }; }\
+    template<>\
+    void Record::TemplateInit::Init< NS::Enum > ( NS::Enum &ref);\
     template<>\
     void Component::TemplateEnum< NS::Enum >::Setup();
 #include "component/template/record/recordenum.h"

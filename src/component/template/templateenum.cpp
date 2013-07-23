@@ -16,7 +16,6 @@ const SizeT _##Enum##_Size = __countof(_##Enum); }
 #include "component/template/record/recordenum.h"
 #include "component/template/record/recordflag.h"
 
-namespace Component {
 
 /// redefine the enum macros
 #undef JEnumBegin
@@ -28,7 +27,7 @@ namespace Component {
 /// define the enum setup
 #define JEnumBegin(NameSpace, Enum)  \
     template<>\
-    void TemplateEnum<NameSpace::Enum>::Setup(){\
+    void Component::TemplateEnum<NameSpace::Enum>::Setup(){\
     using namespace NameSpace;\
     name = #Enum;\
     BeginAdd();
@@ -36,7 +35,11 @@ namespace Component {
 #define JEnumBeginWith(NameSpace, Enum, TYPE) JEnumBegin(NameSpace, Enum)
 #define JEnumValueWith(Enum, n, i) Add(#n, Enum##_##n, false);
 #define JEnumValue(Enum, n) Add(#n, Enum##_##n, false);
-#define JEnumEnd(NameSpace, Enum) EndAdd(); }
+#define JEnumEnd(NameSpace, Enum) EndAdd(); }\
+    template<>\
+    void Record::TemplateInit::Init< NameSpace::Enum > ( NameSpace::Enum &ref){\
+        ref = (NameSpace::Enum)(0);\
+    }
 #include "component/template/record/recordenum.h"
     
 /// define the flag setup
@@ -45,7 +48,8 @@ namespace Component {
 #define JEnumValueWith(Enum, n, i) Add(#n, Enum##_##n, true);
 #define JEnumValue(Enum, n) Add(#n, Enum##_##n, true);
 #include "component/template/record/recordflag.h"
-    
+
+namespace Component {
 /// add
 #undef JEnumBegin
 #undef JEnumBeginWith

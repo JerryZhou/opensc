@@ -12,9 +12,12 @@ static const SizeT UNKNOWN_SIZE = -1;
 /// basic types used in record namespace
 typedef Util::StringAtom NAME;
 typedef Util::StringAtom TID;
+typedef Util::StringAtom SError;
+typedef Util::StringAtom LINK;
 typedef int32_t INT32;
 typedef int UNKNOWN_TYPE;
 typedef float FIXF32;
+typedef Util::Dictionary<NAME,NAME> NAMEDICTIONARY;
 
 /// colcor
 struct SColor{
@@ -90,14 +93,15 @@ struct SFloatRangeMirror{
 struct SActorTerm{
     
 };
-
+    
 /// template record, used to config
 /// data-driven framework
-typedef struct _TemplateRecord{
-}TemplateRecord;
-
-struct AbilEx : public TemplateRecord{
-    
+struct TemplateRecord{
+    int RecordType;
+    TemplateRecord()
+    : RecordType(0){
+    }
 };
+
 }
 #endif
