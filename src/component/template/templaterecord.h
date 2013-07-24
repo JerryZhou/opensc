@@ -3,6 +3,9 @@
 
 #include "stdinc.h"
 #include "util/stringatom.h"
+#include "util/array.h"
+#include "util/dictionary.h"
+#include "base/log.h"
 
 //------------------------------------------------------------------------------
 namespace Record{

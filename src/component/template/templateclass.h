@@ -38,8 +38,10 @@ typedef Util::Dictionary<ETargetFilter, ETargetFilterState> TARGETFILTERDICTIONA
     RecordType = ERecordType_##KIND;
 #define JTemplateStruct(DERIVED) namespace Record { inline DERIVED::DERIVED(){
 #define JTemplateValue(TYPE, NAME)  Record::TemplateInit::Init(NAME);
-#define JTemplateArray(TYPE, NAME, SIZE) NAME = Util::Array< TYPE >(SIZE != Record::UNKNOWN_SIZE ? SIZE : 0, 0);
-#define JTemplateEnumA(TYPE, NAME, ENUM) NAME = Util::Array< TYPE >(Record::_##ENUM##_Size, 0);
+#define JTemplateArray(TYPE, NAME, SIZE) if(SIZE != Record::UNKNOWN_SIZE ) \
+    { TYPE initValue; Record::TemplateInit::Init(initValue); NAME = Util::Array< TYPE >(SIZE != Record::UNKNOWN_SIZE ? SIZE : 0, 0, initValue); }
+#define JTemplateEnumA(TYPE, NAME, ENUM) {TYPE initValue; Record::TemplateInit::Init(initValue);  \
+    NAME = Util::Array< TYPE >(Record::_##ENUM##_Size, 0, initValue); }
 #define JTemplateEnd() }; }
 #include "component/template/record/recordstruct.h"
 #include "component/template/record/recordclass.h"

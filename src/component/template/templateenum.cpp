@@ -37,8 +37,9 @@ const SizeT _##Enum##_Size = __countof(_##Enum); }
 #define JEnumValue(Enum, n) Add(#n, Enum##_##n, false);
 #define JEnumEnd(NameSpace, Enum) EndAdd(); }\
     template<>\
-    void Record::TemplateInit::Init< NameSpace::Enum > ( NameSpace::Enum &ref){\
+    NameSpace::Enum & Record::TemplateInit::Init< NameSpace::Enum > ( NameSpace::Enum &ref){\
         ref = (NameSpace::Enum)(0);\
+        return ref;\
     }
 #include "component/template/record/recordenum.h"
     

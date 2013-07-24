@@ -34,7 +34,7 @@ public:
     
     /// get name from the array
     static const Util::StringAtom& NameAt(IndexT idx){
-        if (idx > 0 && idx < TemplateEnumThis::enumNames.Size()) {
+        if (idx >= 0 && idx < TemplateEnumThis::enumNames.Size()) {
             return TemplateEnumThis::enumNames[idx];
         }
         static Util::StringAtom dummys;
@@ -140,9 +140,9 @@ void SetupEnums();
     enum Enum : TYPE {
 #define JEnumValueWith(Enum, n, i) Enum##_##n = i,
 #define JEnumValue(Enum, n) Enum##_##n,
-#define JEnumEnd(NS, Enum) Enum##_Count, }; }\
+#define JEnumEnd(NS, Enum) Enum##_Count, }; typedef Component::TemplateEnum< NS::Enum > E##Enum;}\
     template<>\
-    void Record::TemplateInit::Init< NS::Enum > ( NS::Enum &ref);\
+    NS::Enum & Record::TemplateInit::Init< NS::Enum > ( NS::Enum &ref);\
     template<>\
     void Component::TemplateEnum< NS::Enum >::Setup();
 #include "component/template/record/recordenum.h"

@@ -22,6 +22,14 @@ set(J_BASE_SRCS
     ${J_T_SRC_DIR}/openscapplication.cpp
     ${J_T_SRC_DIR}/test_log.h
     ${J_T_SRC_DIR}/test_macrodef.h
+    ${J_T_SRC_DIR}/test_event.h
+    ${J_T_SRC_DIR}/test_eventdelegate.h
+    ${J_T_SRC_DIR}/test_eventdispatch.h
+    ${J_T_SRC_DIR}/test_eventtarget.h
+    ${J_T_SRC_DIR}/test_target.h
+    ${J_T_SRC_DIR}/test_templateclass.h
+    ${J_T_SRC_DIR}/test_templateenum.h
+    ${J_T_SRC_DIR}/test_templaterecord.h
 )
 source_group(base FILES ${J_BASE_SRCS})
 
