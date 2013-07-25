@@ -105,6 +105,8 @@ struct TemplateRecord{
     TemplateRecord()
     : RecordType(0){
     }
+    virtual ~TemplateRecord(){
+    }
 };
 
 }

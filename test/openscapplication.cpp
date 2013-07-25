@@ -71,14 +71,21 @@ OpenSCApplication::Close() {
 void
 OpenSCApplication::Run() {
     n_assert(this->isOpen);
-
-    /// setup enums
-    Component::SetupEnums();
-    Component::TemplateLoader::SetupLoader();
     
+    /// setup enums
+    LOGI("begin setup enums");
+    Component::SetupEnums();
+    LOGI("end setup enums");
+    
+    LOGI("begin setup loader");
+    Component::TemplateLoader::SetupLoader();
+    LOGI("end setup loader");
+    
+    LOGI("begin load abilData.xml");
     Ptr<TemplateContainer> container = TemplateContainer::Create();
     TemplateLoader loader;
     loader.LoadRecord("home:data/AbilData.xml", *container);
+    LOGI("end load abilData.xml");
     
     int argc = 0;
     char *argv[] = {

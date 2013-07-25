@@ -234,13 +234,12 @@ bool LoadRecordBody< Record::DERIVED >(Ptr<IO::XmlReader> &xmlReader, const Util
 bool LoadRecordBody< Record::DERIVED >(Ptr<IO::XmlReader> &xmlReader, const Util::StringAtom& member, const Util::StringAtom& attr,\
     Record::DERIVED &ref, Component::TemplateContainer &container){ \
     if(! attr.IsValid()) {LOGE("xxxxxx"); return false; }
-#define JTemplateValue(TYPE, NAME) else if( member == #NAME ) { \
+#define JTemplateValue(TYPE, NAME)  static Util::StringAtom s_##NAME (#NAME); if( member == s_##NAME ) { \
         TemplateLoader::LoadType< TYPE >(xmlReader, ref.NAME, attr, container); return true; }
-#define JTemplateArray(TYPE, NAME, SIZE) else if ( member == #NAME ) { \
+#define JTemplateArray(TYPE, NAME, SIZE) static Util::StringAtom s_##NAME (#NAME); if ( member == s_##NAME ) { \
         TYPE elem;\
-        TemplateLoader::LoadType< TYPE>(xmlReader, elem, attr, container);\
-        ref.NAME.Append(elem); return true; }
-#define JTemplateEnumA(TYPE, NAME, ENUM) else if (member == #NAME ) { \
+        TemplateLoader::LoadType< TYPE>(xmlReader, elem, attr, container); ref.NAME.Append(elem); return true; }
+#define JTemplateEnumA(TYPE, NAME, ENUM) static Util::StringAtom s_##NAME (#NAME); if (member == s_##NAME ) { \
         Util::StringAtom idxName = xmlReader->GetString(TemplateLoader::IndexAttr.Value());\
         IndexT idx = (IndexT)(Component::TemplateEnum< ENUM >::IndexOf(idxName));\
         TemplateLoader::LoadType< TYPE>(xmlReader, ref.NAME[idx], attr, container); return true; }
