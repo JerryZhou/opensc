@@ -8,6 +8,8 @@
 #include "openscapplication.h"
 #include "base/log.h"
 #include "component/template/templateenum.h"
+#include "component/template/templateloader.h"
+#include "component/template/templatecontainer.h"
 
 using ::testing::EmptyTestEventListener;
 using ::testing::InitGoogleTest;
@@ -72,11 +74,11 @@ OpenSCApplication::Run() {
 
     /// setup enums
     Component::SetupEnums();
+    Component::TemplateLoader::SetupLoader();
     
-    typedef TemplateEnum<EAbilAlignment> EnumAbliAlignment;
-    SizeT numOfEAbiAlignment = EnumAbliAlignment::Size();
-    SizeT fromConstSize = Record::_EAbilAlignment_Size;
-    LOGE("%s: %d - %d ", EnumAbliAlignment::Name().Value(), numOfEAbiAlignment, fromConstSize);
+    Ptr<TemplateContainer> container = TemplateContainer::Create();
+    TemplateLoader loader;
+    loader.LoadRecord("home:data/AbilData.xml", *container);
     
     int argc = 0;
     char *argv[] = {

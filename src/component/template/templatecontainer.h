@@ -4,10 +4,13 @@
 #include "util/stringatom.h"
 #include "util/dictionary.h"
 #include "base/event/eventtarget.h"
+#include "component/template/templateenum.h"
 
-namespace Component{
-/// record
+/// declare record
+namespace Record {
 struct TemplateRecord;
+}
+namespace Component{
 /// continer
 class TemplateContainer : public Base::EventTarget{
     __DeclareClass(TemplateContainer);
@@ -18,12 +21,15 @@ public:
     virtual ~TemplateContainer();
 
     /// find the record
-    const TemplateRecord* FindRecord(const Util::StringAtom& name) const;
+    const Record::TemplateRecord* FindRecord(const Util::StringAtom& name, Record::ERecordType record) const;
+    
     /// add record
-    void AddRecord(const Util::StringAtom& n, const TemplateRecord* record);
+    void AddRecord(const Record::TemplateRecord* record);
 
 private:
-    Util::Dictionary<const Util::StringAtom, const TemplateRecord*> records;
+    typedef Util::Dictionary<Util::StringAtom, const Record::TemplateRecord*> RecordDictionary;
+    typedef Util::Array<RecordDictionary> RecordDicArray;
+    RecordDicArray records;
 };
 }
 #endif

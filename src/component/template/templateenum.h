@@ -64,11 +64,11 @@ public:
     /// get the num of name
     static const ENUMTYPE& Value(const Util::StringAtom& n){
         IndexT idx = TemplateEnumThis::name2Enum.FindIndex(n);
-        if (idx != InvalidIndex) {
-            return TemplateEnumThis::name2Enum.ValueAtIndex(idx);
+        if (idx == InvalidIndex) {
+            idx = 0;
+            LOGE("wrong name value to find enum %s in %s", n.Value(), TemplateEnumThis::name.Value());
         }
-        LOGE("wrong name value to find enum %s in %s", n.Value(), TemplateEnumThis::name.Value());
-        return (ENUMTYPE)(Size());
+        return TemplateEnumThis::name2Enum.ValueAtIndex(idx);
     }
     
     /// get the size of enum

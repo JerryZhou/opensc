@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<Catalog>
+    <AbilBuild default="1" id="TerranAddOns">
+        <EditorCategories value="Race:Terran,AbilityorEffectType:Units"/>
+        <Alert value="AddOnComplete"/>
+        <Type value="AddOn"/>
+        <FlagArray index="InstantPlacement" value="1"/>
+        <FlagArray index="PeonDisableAbils" value="1"/>
+        <FlagArray index="ShowProgress" value="1"/>
+        <InfoArray index="Build1" Unit="TechLab" Time="30" AddOnParentCmdPriority="-1">
+            <Button DefaultButtonFace="TechLabBarracks" State="Suppressed"/>
+        </InfoArray>
+        <InfoArray index="Build2" Unit="Reactor" Time="40" AddOnParentCmdPriority="1">
+            <Button DefaultButtonFace="Reactor" State="Restricted"/>
+        </InfoArray>
+        <Name value="Abil/Name/TerranAddOns"/>
+    </AbilBuild>
+</Catalog>

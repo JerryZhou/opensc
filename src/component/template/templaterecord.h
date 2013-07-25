@@ -101,6 +101,7 @@ struct SActorTerm{
 /// data-driven framework
 struct TemplateRecord{
     int RecordType;
+    Util::StringAtom Id;
     TemplateRecord()
     : RecordType(0){
     }
