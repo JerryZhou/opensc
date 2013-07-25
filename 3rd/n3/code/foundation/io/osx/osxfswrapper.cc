@@ -54,10 +54,10 @@ OSXFSWrapper::Write(Handle handle, const void* buf, Stream::Size numBytes)
 Stream::Size
 OSXFSWrapper::Read(Handle handle, void* buf, Stream::Size numBytes)
 {
-    int numItemsRead = fread(buf, numBytes, 1, handle);
+    int numItemsRead = fread(buf, 1, numBytes, handle);
     int result = ferror(handle);
     n_assert(result == 0);
-    return numBytes * numItemsRead;
+    return 1 * numItemsRead;
 }
     
 //------------------------------------------------------------------------------
@@ -104,9 +104,10 @@ OSXFSWrapper::Eof(Handle handle)
 Stream::Size
 OSXFSWrapper::GetFileSize(Handle handle)
 {
-    // @todo: implement using OSXFSWrapper functions
-    int result = fseek(handle, 0L, SEEK_END);
-    return ftell(handle);
+    struct stat buf;
+    int fd = ::fileno(handle);
+    ::fstat(fd, &buf);
+    return buf.st_size;
 }
     
 //------------------------------------------------------------------------------
