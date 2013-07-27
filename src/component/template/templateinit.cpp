@@ -51,4 +51,53 @@ double& TemplateInit::Init<double>(double &ref){
         ref = 0;
     return ref;
 }
+template<>
+Record::SColor& TemplateInit::Init<Record::SColor>(Record::SColor &ref){
+    ref.r = ref.g = ref.b = 0;
+    ref.a = 255;
+    return ref;
+}
+template<>
+Record::SVector2& TemplateInit::Init<Record::SVector2>(Record::SVector2 &ref){
+    ref.x = 0;
+    ref.y = 0;
+    return ref;
+}
+template<>
+Record::SVector3& TemplateInit::Init<Record::SVector3>(Record::SVector3 &ref){
+    ref.x = 0;
+    ref.y = 0;
+    ref.z = 0;
+    return ref;
+}
+template<>
+Record::SVector4& TemplateInit::Init<Record::SVector4>(Record::SVector4 &ref){
+    ref.x = 0;
+    ref.y = 0;
+    ref.z = 0;
+    ref.w = 0;
+    return ref;
+}
+    
+template<>
+Record::SIntRange& TemplateInit::Init<Record::SIntRange>(Record::SIntRange &ref){
+    ref.min = 0;
+    ref.max = 0;
+    return ref;
+}
+        
+template<>
+Record::SFloatRange& TemplateInit::Init<Record::SFloatRange>(Record::SFloatRange &ref){
+    ref.min = 0;
+    ref.max = 0;
+    return ref;
+}
+            
+template<>
+Record::SRotator& TemplateInit::Init<Record::SRotator>(Record::SRotator &ref){
+    ref.pitch = 0;
+    ref.roll = 0;
+    ref.yaw = 0;
+    return ref;
+}
 }

@@ -30,8 +30,9 @@ set(J_BASE_SRCS
     ${J_T_SRC_DIR}/test_templateclass.h
     ${J_T_SRC_DIR}/test_templateenum.h
     ${J_T_SRC_DIR}/test_templaterecord.h
+    ${J_T_SRC_DIR}/test_templateloader.h
 )
-source_group(base FILES ${J_BASE_SRCS})
+source_group(src FILES ${J_BASE_SRCS})
 
 # static library
 add_executable(jtest 

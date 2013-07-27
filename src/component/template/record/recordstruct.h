@@ -6,6 +6,12 @@ JTemplateValue(FIXF32, Value)
 JTemplateEnd()
 
 //----------------------------------------------------------------------------------------
+JTemplateStruct(SBlendStop)
+JTemplateValue(SBaseRange, Blend)
+JTemplateValue(SBaseRange, Stop)
+JTemplateEnd()
+
+//----------------------------------------------------------------------------------------
 JTemplateStruct(SConversationAction)
 JTemplateValue(NAME,         FixedId)
 JTemplateValue(INT32,        Index)
@@ -290,7 +296,7 @@ JTemplateEnd()
 
 //----------------------------------------------------------------------------------------
 JTemplateStruct(SErrorOverride)
-JTemplateValue(EError, SError)
+JTemplateValue(SError, Error)
 JTemplateValue(TID,    GroupSound)
 JTemplateValue(TID,    Sound)
 JTemplateValue(NAME,   Text)

@@ -13,7 +13,7 @@ namespace Record{
 /// typedef class id
 typedef Messaging::Id RecordClassId;
 /// const numbers
-static const SizeT UNKNOWN_SIZE = -1;
+static const SizeT UNKNOWN_SIZE = InvalidIndex;
     
 /// basic types used in record namespace
 typedef Util::StringAtom NAME;
@@ -21,7 +21,7 @@ typedef Util::StringAtom TID;
 typedef Util::StringAtom SError;
 typedef Util::StringAtom LINK;
 typedef int32_t INT32;
-typedef int UNKNOWN_TYPE;
+typedef Util::StringAtom UNKNOWN_TYPE;
 typedef float FIXF32;
 typedef Util::Dictionary<NAME,NAME> NAMEDICTIONARY;
 
@@ -62,42 +62,44 @@ struct SFloatRange{
 };
 /// rotator
 struct SRotator{
-    float x;
-    float y;
-    float z;
-    float angle;
-};
-/// error
-struct EError{
-
-};
-/// target filters
-struct STargetFilters{
-    
+    float pitch;
+    float roll;
+    float yaw;
 };
 /// actor key
 struct SActorKey{
-    
+    TID actor;
+    TID alias;
+    TID custom;
+    TID reference;
+    TID system;
 };
 /// time of day
 struct STimeOfDay{
-    
+    int hour;
+    int minute;
+    int second;
+    STimeOfDay(){
+        memset(this, 0, sizeof(STimeOfDay));
+    }
 };
 /// base range
 struct SBaseRange{
-    
-};
-/// blend stop
-struct SBlendStop{
-    
+    int base;
+    int range;
+    SBaseRange(){
+        memset(this, 0, sizeof(SBaseRange));
+    }
 };
 /// float range in mirror
 struct SFloatRangeMirror{
-    
-};
-/// actor term
-struct SActorTerm{
-    
+    float negtiveMax;
+    float negtiveMin;
+    float positiveMax;
+    float positiveMin;
+    SFloatRangeMirror(){
+        memset(this, 0, sizeof(SFloatRangeMirror));
+    }
 };
 
 //------------------------------------------------------------------------------

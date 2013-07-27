@@ -20,6 +20,11 @@ using ::testing::TestInfo;
 using ::testing::TestPartResult;
 using ::testing::UnitTest;
 
+using namespace Util;
+using namespace IO;
+using namespace Component;
+using namespace Record;
+
 #include "test_event.h"
 #include "test_eventdelegate.h"
 #include "test_eventdispatch.h"
@@ -27,6 +32,7 @@ using ::testing::UnitTest;
 #include "test_templateenum.h"
 #include "test_templateclass.h"
 #include "test_templaterecord.h"
+#include "test_templateloader.h"
 #include "test_log.h"
 #include "test_macrodef.h"
 #include "test_target.h"
@@ -71,21 +77,9 @@ OpenSCApplication::Close() {
 void
 OpenSCApplication::Run() {
     n_assert(this->isOpen);
-    
-    /// setup enums
-    LOGI("begin setup enums");
+    // setup the component
     Component::SetupEnums();
-    LOGI("end setup enums");
-    
-    LOGI("begin setup loader");
     Component::TemplateLoader::SetupLoader();
-    LOGI("end setup loader");
-    
-    LOGI("begin load abilData.xml");
-    Ptr<TemplateContainer> container = TemplateContainer::Create();
-    TemplateLoader loader;
-    loader.LoadRecord("home:data/AbilData.xml", *container);
-    LOGI("end load abilData.xml");
     
     int argc = 0;
     char *argv[] = {

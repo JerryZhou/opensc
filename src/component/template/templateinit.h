@@ -31,6 +31,19 @@ template<>
 float& TemplateInit::Init<float>(float &ref);
 template<>
 double& TemplateInit::Init<double>(double &ref);
-
+template<>
+Record::SColor& TemplateInit::Init<Record::SColor>(Record::SColor &ref);
+template<>
+Record::SVector2& TemplateInit::Init<Record::SVector2>(Record::SVector2 &ref);
+template<>
+Record::SVector3& TemplateInit::Init<Record::SVector3>(Record::SVector3 &ref);
+template<>
+Record::SVector4& TemplateInit::Init<Record::SVector4>(Record::SVector4 &ref);
+template<>
+Record::SIntRange& TemplateInit::Init<Record::SIntRange>(Record::SIntRange &ref);
+template<>
+Record::SFloatRange& TemplateInit::Init<Record::SFloatRange>(Record::SFloatRange &ref);
+template<>
+Record::SRotator& TemplateInit::Init<Record::SRotator>(Record::SRotator &ref);
 }
 #endif

@@ -15,7 +15,19 @@ private:
 
 /// extend record type
 namespace Record {
+/// dictionary
 typedef Util::Dictionary<ETargetFilter, ETargetFilterState> TARGETFILTERDICTIONARY;
+/// target filters
+struct STargetFilters{
+    TARGETFILTERDICTIONARY Filters;
+};
+/// actor term
+struct SActorTerm{
+    EActorTermType type;
+    TID value;
+    SActorTerm():type(EActorTermType_AbilKey){
+    }
+};
 }
 
 /// include in record base

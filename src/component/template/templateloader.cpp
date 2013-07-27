@@ -51,6 +51,21 @@ void TemplateLoader::LoadRecord(const IO::URI &uri, TemplateContainer& container
         stream->Close();
     }
 }
+    
+#include <float.h>
+static float AsFloat(const Util::String &v){
+    if (v.IsValidFloat()) {
+        return v.AsFloat();
+    }
+    
+    if (v == Util::String("MAX")) {
+        return FLT_MAX;
+    }else if(v == Util::String("MIN")){
+        return FLT_MIN;
+    }
+    
+    return 0;
+}
 
 template<>
 void TemplateLoader::LoadType<uint8_t>(Ptr<IO::XmlReader> &xmlReader, uint8_t &ref, const Util::StringAtom &attr, TemplateContainer& container){
@@ -115,6 +130,219 @@ void TemplateLoader::LoadType<Util::StringAtom>(Ptr<IO::XmlReader> &xmlReader, U
 template<>
 void TemplateLoader::LoadType<Util::String>(Ptr<IO::XmlReader> &xmlReader, Util::String &ref, const Util::StringAtom &attr, TemplateContainer& container){
     ref = xmlReader->GetString(attr.Value());
+}
+    
+template<>
+void TemplateLoader::LoadType<Record::STargetFilters>(Ptr<IO::XmlReader> &xmlReader, Record::STargetFilters &ref,
+                                                          const Util::StringAtom &attr, Component::TemplateContainer &container){
+    
+    Util::String value = xmlReader->GetString(attr.Value());
+    Util::Array<Util::String> filterGroups;
+    value.Tokenize(Util::String(";"), filterGroups);
+    for (IndexT gpIdx = 0; gpIdx < filterGroups.Size(); ++gpIdx) {
+        const Util::String& filters = filterGroups[gpIdx];
+        if (filters != "-" && filters.Length() > 0) {
+            Record::ETargetFilterState state = (Record::ETargetFilterState)(gpIdx);
+            Util::Array<Util::String> filtersToTarget;
+            filters.Tokenize(Util::String(","), filtersToTarget);
+            for (IndexT filterIdx = 0; filterIdx < filtersToTarget.Size(); ++filterIdx) {
+                Record::ETargetFilter filter = Record::EETargetFilter::Value(filtersToTarget[filterIdx]);
+                ref.Filters.Add(filter, state);
+            }
+        }
+    }
+}
+    
+template<>
+void TemplateLoader::LoadType<Record::SColor>(Ptr<IO::XmlReader> &xmlReader, Record::SColor &ref, const Util::StringAtom &attr, Component::TemplateContainer &container){
+    Util::String value = xmlReader->GetString(attr.Value());
+    Util::Array<Util::String> colors;
+    value.Tokenize(Util::String(","), colors);
+    switch (colors.Size()) {
+        case 4:
+            ref.a = colors[3].AsInt();
+        case 3:
+            ref.b = colors[2].AsInt();
+        case 2:
+            ref.g = colors[1].AsInt();
+        case 1:
+            ref.r = colors[0].AsInt();
+        default:
+            break;
+    }
+}
+template<>
+void TemplateLoader::LoadType<Record::SVector2>(Ptr<IO::XmlReader> &xmlReader, Record::SVector2 &ref, const Util::StringAtom &attr, Component::TemplateContainer &container){
+    Util::String value = xmlReader->GetString(attr.Value());
+    Util::Array<Util::String> vectors;
+    value.Tokenize(Util::String(","), vectors);
+    switch (vectors.Size()) {
+        case 2:
+            ref.y = vectors[1].AsInt();
+        case 1:
+            ref.x = vectors[0].AsInt();
+        default:
+            break;
+    }
+}
+    
+template<>
+void TemplateLoader::LoadType<Record::SVector3>(Ptr<IO::XmlReader> &xmlReader, Record::SVector3 &ref, const Util::StringAtom &attr, Component::TemplateContainer &container){
+    Util::String value = xmlReader->GetString(attr.Value());
+    Util::Array<Util::String> vectors;
+    value.Tokenize(Util::String(","), vectors);
+    switch (vectors.Size()) {
+        case 3:
+            ref.z = vectors[2].AsInt();
+        case 2:
+            ref.y = vectors[1].AsInt();
+        case 1:
+            ref.x = vectors[0].AsInt();
+        default:
+            break;
+    }
+}
+     
+template<>
+void TemplateLoader::LoadType<Record::SVector4>(Ptr<IO::XmlReader> &xmlReader, Record::SVector4 &ref, const Util::StringAtom &attr, Component::TemplateContainer &container){
+    Util::String value = xmlReader->GetString(attr.Value());
+    Util::Array<Util::String> vectors;
+    value.Tokenize(Util::String(","), vectors);
+    switch (vectors.Size()) {
+        case 4:
+            ref.w = vectors[3].AsInt();
+        case 3:
+            ref.z = vectors[2].AsInt();
+        case 2:
+            ref.y = vectors[1].AsInt();
+        case 1:
+            ref.x = vectors[0].AsInt();
+        default:
+            break;
+    }
+}
+    
+template<>
+void TemplateLoader::LoadType<Record::SIntRange>(Ptr<IO::XmlReader> &xmlReader, Record::SIntRange &ref, const Util::StringAtom &attr, Component::TemplateContainer &container){
+    Util::String value = xmlReader->GetString(attr.Value());
+    Util::Array<Util::String> vectors;
+    value.Tokenize(Util::String(","), vectors);
+    switch (vectors.Size()) {
+        case 2:
+            ref.max = vectors[1].AsInt();
+        case 1:
+            ref.min = vectors[0].AsInt();
+        default:
+            break;
+    }
+}
+     
+template<>
+void TemplateLoader::LoadType<Record::SFloatRange>(Ptr<IO::XmlReader> &xmlReader, Record::SFloatRange &ref, const Util::StringAtom &attr, Component::TemplateContainer &container){
+    Util::String value = xmlReader->GetString(attr.Value());
+    Util::Array<Util::String> vectors;
+    value.Tokenize(Util::String(","), vectors);
+    switch (vectors.Size()) {
+        case 2:
+            ref.max = vectors[1].AsFloat();
+        case 1:
+            ref.min = vectors[0].AsFloat();
+        default:
+            break;
+    }
+}
+         
+template<>
+void TemplateLoader::LoadType<Record::SRotator>(Ptr<IO::XmlReader> &xmlReader, Record::SRotator &ref, const Util::StringAtom &attr, Component::TemplateContainer &container){
+    Util::String value = xmlReader->GetString(attr.Value());
+    Util::Array<Util::String> vectors;
+    value.Tokenize(Util::String(","), vectors);
+    switch (vectors.Size()) {
+        case 3:
+            ref.pitch = AsFloat(vectors[2]);
+            ref.roll = AsFloat(vectors[1]);
+            ref.yaw = AsFloat(vectors[0]);
+            break;
+        case 2:
+            ref.roll = AsFloat(vectors[1]);
+            ref.yaw = AsFloat(vectors[0]);
+            break;
+        case 1:
+            float vf = AsFloat(vectors[0]);
+            ref.roll = ref.yaw = ref.pitch = vf;
+            break;
+    }
+}
+    
+template<>
+void TemplateLoader::LoadType<Record::SActorKey>(Ptr<IO::XmlReader> &xmlReader, Record::SActorKey &ref, const Util::StringAtom &attr, Component::TemplateContainer &container){
+    ref.actor = xmlReader->GetString(attr.Value());
+}
+      
+template<>
+void TemplateLoader::LoadType<Record::STimeOfDay>(Ptr<IO::XmlReader> &xmlReader, Record::STimeOfDay &ref, const Util::StringAtom &attr, Component::TemplateContainer &container){
+    Util::String value = xmlReader->GetString(attr.Value());
+    Util::Array<Util::String> vectors;
+    value.Tokenize(Util::String(","), vectors);
+    switch (vectors.Size()) {
+        case 3:
+            ref.second= vectors[2].AsInt();
+        case 2:
+            ref.minute = vectors[1].AsInt();
+        case 1:
+            ref.hour = vectors[0].AsInt();
+        default:
+            break;
+    }
+}
+       
+template<>
+void TemplateLoader::LoadType<Record::SBaseRange>(Ptr<IO::XmlReader> &xmlReader, Record::SBaseRange &ref, const Util::StringAtom &attr, Component::TemplateContainer &container){
+    Util::String value = xmlReader->GetString(attr.Value());
+    Util::Array<Util::String> vectors;
+    value.Tokenize(Util::String(","), vectors);
+    switch (vectors.Size()) {
+        case 2:
+            ref.range = vectors[1].AsInt();
+        case 1:
+            ref.base = vectors[0].AsInt();
+        default:
+            break;
+    }
+}
+        
+template<>
+void TemplateLoader::LoadType<Record::SFloatRangeMirror>(Ptr<IO::XmlReader> &xmlReader, Record::SFloatRangeMirror &ref, const Util::StringAtom &attr, Component::TemplateContainer &container){
+    Util::String value = xmlReader->GetString(attr.Value());
+    Util::Array<Util::String> vectors;
+    value.Tokenize(Util::String(","), vectors);
+    switch (vectors.Size()) {
+        case 4:
+            ref.positiveMin = AsFloat(vectors[3]);
+        case 3:
+            ref.positiveMax = AsFloat(vectors[2]);
+        case 2:
+            ref.negtiveMin = AsFloat(vectors[1]);
+        case 1:
+            ref.negtiveMax = AsFloat(vectors[0]);
+        default:
+            break;
+    }
+}
+         
+template<>
+void TemplateLoader::LoadType<Record::SActorTerm>(Ptr<IO::XmlReader> &xmlReader, Record::SActorTerm &ref, const Util::StringAtom &attr, Component::TemplateContainer &container){
+    Util::String value = xmlReader->GetString(attr.Value());
+    Util::Array<Util::String> vectors;
+    value.Tokenize(Util::String(" "), vectors);
+    switch (vectors.Size()) {
+        case 2:
+            ref.value = vectors[1];
+        case 1:
+            ref.type = EEActorTermType::Value(vectors[0]);
+        default:
+            break;
+    }
 }
     
 /// load head of class
