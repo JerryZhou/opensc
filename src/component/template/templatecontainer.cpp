@@ -37,4 +37,19 @@ void TemplateContainer::AddRecord(const Record::TemplateRecord* record){
         this->records[record->RecordType].Add(record->Id, record);
     }
 }
+    
+/// add ref as the defalt record
+void TemplateContainer::AddDefaultRecord(const TemplateRecordPtr &ref){
+    this->defaultRecords.Add(&(ref->GetRecordId()), ref);
+}
+
+/// find if there is a default structor
+const Record::TemplateRecord* TemplateContainer::FindDefaultRecord(const TemplateRecordPtr &ref) const{
+    IndexT idx = this->defaultRecords.FindIndex(&(ref->GetRecordId()));
+    if (idx != InvalidIndex) {
+        return this->defaultRecords.ValueAtIndex(idx);
+    }
+    return NULL;
+}
+    
 }

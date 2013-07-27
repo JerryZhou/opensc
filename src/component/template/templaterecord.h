@@ -6,9 +6,12 @@
 #include "util/array.h"
 #include "util/dictionary.h"
 #include "base/log.h"
+#include "messaging/message.h"
 
 //------------------------------------------------------------------------------
 namespace Record{
+/// typedef class id
+typedef Messaging::Id RecordClassId;
 /// const numbers
 static const SizeT UNKNOWN_SIZE = -1;
     
@@ -96,10 +99,23 @@ struct SFloatRangeMirror{
 struct SActorTerm{
     
 };
-    
-/// template record, used to config
+
+//------------------------------------------------------------------------------
+/**
+ Message Id macros.
+ */
+#define __DeclareRecordClassId \
+    static Record::RecordClassId RecordId; \
+    virtual const Messaging::Id& GetRecordId() const;
+
+#define __ImplementRecordClassId(type) \
+    Record::RecordClassId type::RecordId; \
+    const Record::RecordClassId& type::GetRecordId() const { return type::RecordId; }
+
+    /// template record, used to config
 /// data-driven framework
 struct TemplateRecord{
+    __DeclareRecordClassId;
     int RecordType;
     Util::StringAtom Id;
     TemplateRecord()

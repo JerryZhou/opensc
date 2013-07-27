@@ -15,7 +15,7 @@ Util::StringAtom TemplateLoader::IdAttr;
 Util::StringAtom TemplateLoader::DefaultAttr;
 Util::StringAtom TemplateLoader::ParentAttr;
 Util::StringAtom TemplateLoader::IndexAttr;
-    
+  
 /// load class
 void TemplateLoader::Load(Ptr<IO::XmlReader> &xmlReader, const Util::StringAtom& n, TemplateRecordPtr &ref, TemplateContainer& container){
     IndexT idx = loadEntrys.FindIndex(n);
@@ -120,24 +120,37 @@ void TemplateLoader::LoadType<Util::String>(Ptr<IO::XmlReader> &xmlReader, Util:
 /// load head of class
 template<typename TYPE>
 void LoadRecordHead(Ptr<IO::XmlReader> &xmlReader, TemplateLoader::TemplateRecordPtr &ref, Component::TemplateContainer &container){
-    TYPE * data = new TYPE();
-    if(xmlReader->HasAttr("parent")) {
-        Util::StringAtom parent = xmlReader->GetString("parent");
+    TYPE * data = NULL;
+    /// set the id
+    if (xmlReader->HasAttr(TemplateLoader::IdAttr.Value())) {
+        Util::StringAtom id = xmlReader->GetString(TemplateLoader::IdAttr.Value());
+        data = new TYPE();
+        data->Id = id;
+        ref = data;
+    }else {
+        return;
+    }
+    
+    /// init from default
+    const Record::TemplateRecord* defaultRecord = container.FindDefaultRecord(data);
+    if (defaultRecord) {
+        TYPE *defaultDerived = (TYPE*)(defaultRecord);
+        if (defaultDerived) {
+            *data = *defaultDerived;
+        }
+    }else if (xmlReader->HasAttr(TemplateLoader::DefaultAttr.Value())){
+        container.AddDefaultRecord(data);
+    }
+    
+    /// init from parent
+    if(xmlReader->HasAttr(TemplateLoader::ParentAttr.Value())) {
+        Util::StringAtom parent = xmlReader->GetString(TemplateLoader::ParentAttr.Value());
         const Record::TemplateRecord * recordParent = container.FindRecord(parent, (Record::ERecordType)(data->RecordType));
-        if(recordParent) {
+        if(recordParent && recordParent != defaultRecord) {
             TYPE *parntDerived = (TYPE*)(recordParent);
             *data = *parntDerived;
         }
     }
-    
-    if (xmlReader->HasAttr("id")) {
-        Util::StringAtom id = xmlReader->GetString("id");
-        data->Id = id;
-        ref = data;
-        return;
-    }
-    
-    delete data;
 }
 
 template<typename TYPE >

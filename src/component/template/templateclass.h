@@ -19,29 +19,15 @@ typedef Util::Dictionary<ETargetFilter, ETargetFilterState> TARGETFILTERDICTIONA
 }
 
 /// include in record base
-#define JTemplateClass(DERIVED, BASE, KIND) namespace Record { struct DERIVED : public BASE { DERIVED();
+#define JTemplateClass(DERIVED, BASE, KIND) namespace Record { \
+    struct DERIVED : public BASE { \
+    DERIVED(); \
+    __DeclareRecordClassId; 
+
 #define JTemplateStruct(DERIVED) namespace Record { struct DERIVED {  DERIVED();
 #define JTemplateValue(TYPE, NAME) TYPE NAME;
 #define JTemplateArray(TYPE, NAME, SIZE) Util::Array< TYPE > NAME;
 #define JTemplateEnumA(TYPE, NAME, ENUM) Util::Array< TYPE > NAME;
-#define JTemplateEnd() }; }
-#include "component/template/record/recordstruct.h"
-#include "component/template/record/recordclass.h"
-
-#undef JTemplateClass
-#undef JTemplateStruct
-#undef JTemplateValue
-#undef JTemplateArray
-#undef JTemplateEnumA
-#undef JTemplateEnd
-#define JTemplateClass(DERIVED, BASE, KIND) namespace Record { inline DERIVED::DERIVED(){ \
-    RecordType = ERecordType_##KIND;
-#define JTemplateStruct(DERIVED) namespace Record { inline DERIVED::DERIVED(){
-#define JTemplateValue(TYPE, NAME)  Record::TemplateInit::Init(NAME);
-#define JTemplateArray(TYPE, NAME, SIZE) if(SIZE != Record::UNKNOWN_SIZE ) \
-    { TYPE initValue; Record::TemplateInit::Init(initValue); NAME = Util::Array< TYPE >(SIZE != Record::UNKNOWN_SIZE ? SIZE : 0, 0, initValue); }
-#define JTemplateEnumA(TYPE, NAME, ENUM) {TYPE initValue; Record::TemplateInit::Init(initValue);  \
-    NAME = Util::Array< TYPE >(Record::_##ENUM##_Size, 0, initValue); }
 #define JTemplateEnd() }; }
 #include "component/template/record/recordstruct.h"
 #include "component/template/record/recordclass.h"

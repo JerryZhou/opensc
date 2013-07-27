@@ -5,16 +5,16 @@
 #include "util/dictionary.h"
 #include "base/event/eventtarget.h"
 #include "component/template/templateenum.h"
+#include "component/template/templaterecord.h"
 
-/// declare record
-namespace Record {
-struct TemplateRecord;
-}
 namespace Component{
 /// continer
 class TemplateContainer : public Base::EventTarget{
     __DeclareClass(TemplateContainer);
 public:
+    /// declare types
+    typedef Record::TemplateRecord* TemplateRecordPtr;
+    
     /// constructor
     TemplateContainer();
     /// destructor
@@ -25,11 +25,19 @@ public:
     
     /// add record
     void AddRecord(const Record::TemplateRecord* record);
+    
+    /// default manager
+    void AddDefaultRecord(const TemplateRecordPtr &ref);
+    
+    /// get the default ref for class
+    const Record::TemplateRecord* FindDefaultRecord(const TemplateRecordPtr &ref) const;
 
 private:
+    typedef Util::Dictionary<const Record::RecordClassId*, const Record::TemplateRecord*> DefaultRecordDictonary;
     typedef Util::Dictionary<Util::StringAtom, const Record::TemplateRecord*> RecordDictionary;
     typedef Util::Array<RecordDictionary> RecordDicArray;
     RecordDicArray records;
+    DefaultRecordDictonary defaultRecords;
 };
 }
 #endif
