@@ -1,7 +1,7 @@
 #ifndef _JB__EVENTTARGET_H_
 #define _JB__EVENTTARGET_H_
 
-#include "stdneb.h"
+#include "stdinc.h"
 #include "base/target.h"
 
 namespace Base{

@@ -17,6 +17,10 @@ set(J_BASE_SRCS
     ${J_SRC_DIR}/base/log.cpp
     ${J_SRC_DIR}/base/target.h
     ${J_SRC_DIR}/base/target.cpp
+    ${J_SRC_DIR}/base/markflag.h
+    ${J_SRC_DIR}/base/markflag.cpp
+    ${J_SRC_DIR}/base/manager.h
+    ${J_SRC_DIR}/base/manager.cpp
 )
 source_group(base FILES ${J_BASE_SRCS})
 
@@ -33,10 +37,12 @@ set(J_BASE_EVENT_SRCS
 source_group(base\\event FILES ${J_BASE_EVENT_SRCS})
 
 set(J_COMPONENT_ENTITY_SRCS
-    ${J_SRC_DIR}/component/entity/entity.h
-    ${J_SRC_DIR}/component/entity/entity.cpp
+    ${J_SRC_DIR}/component/unit/unit.h
+    ${J_SRC_DIR}/component/unit/unit.cpp
+    ${J_SRC_DIR}/component/unit/unitmanager.h
+    ${J_SRC_DIR}/component/unit/unitmanager.cpp
 )
-source_group(component\\entity FILES ${J_COMPONENT_ENTITY_SRCS})
+source_group(component\\unit FILES ${J_COMPONENT_ENTITY_SRCS})
 
 set(J_COMPONENT_TEMPLATE_SRCS
     ${J_SRC_DIR}/component/template/templaterecord.h
@@ -51,6 +57,8 @@ set(J_COMPONENT_TEMPLATE_SRCS
     ${J_SRC_DIR}/component/template/templateinit.cpp
     ${J_SRC_DIR}/component/template/templateloader.h
     ${J_SRC_DIR}/component/template/templateloader.cpp
+    ${J_SRC_DIR}/component/template/templatemanager.h
+    ${J_SRC_DIR}/component/template/templatemanager.cpp
 )
 source_group(component\\template FILES ${J_COMPONENT_TEMPLATE_SRCS})
 

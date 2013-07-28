@@ -13,5 +13,6 @@ public:
     virtual ~Target();
 
 };// end of Target
+typedef int UnitId;
 }// end of Base
 #endif

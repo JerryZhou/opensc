@@ -33,6 +33,7 @@ struct SActorTerm{
 /// include in record base
 #define JTemplateClass(DERIVED, BASE, KIND) namespace Record { \
     struct DERIVED : public BASE { \
+    static ERecordType RECORDTYPE;\
     DERIVED(); \
     __DeclareRecordClassId; 
 

@@ -119,7 +119,7 @@ struct SFloatRangeMirror{
 struct TemplateRecord{
     __DeclareRecordClassId;
     int RecordType;
-    Util::StringAtom Id;
+    TID Id;
     TemplateRecord()
     : RecordType(0){
     }

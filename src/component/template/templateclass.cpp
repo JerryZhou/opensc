@@ -10,6 +10,7 @@ namespace Component {
 #undef JTemplateEnumA
 #undef JTemplateEnd
 #define JTemplateClass(DERIVED, BASE, KIND) namespace Record { \
+    ERecordType DERIVED::RECORDTYPE = ERecordType_##KIND;\
     __ImplementRecordClassId( DERIVED );\
     DERIVED::DERIVED(){ \
     RecordType = ERecordType_##KIND;
