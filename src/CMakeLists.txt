@@ -24,6 +24,23 @@ set(J_BASE_SRCS
 )
 source_group(base FILES ${J_BASE_SRCS})
 
+set(J_BASE_FSM_SRCS
+    ${J_SRC_DIR}/base/fsm/fsm.h
+    ${J_SRC_DIR}/base/fsm/fsm.cpp
+    ${J_SRC_DIR}/base/fsm/fsmaction.h
+    ${J_SRC_DIR}/base/fsm/fsmaction.cpp
+    ${J_SRC_DIR}/base/fsm/fsmcondition.h
+    ${J_SRC_DIR}/base/fsm/fsmcondition.cpp
+    ${J_SRC_DIR}/base/fsm/fsmcontext.h
+    ${J_SRC_DIR}/base/fsm/fsmcontext.cpp
+    ${J_SRC_DIR}/base/fsm/fsmevent.h
+    ${J_SRC_DIR}/base/fsm/fsmevent.cpp
+    ${J_SRC_DIR}/base/fsm/fsmtransition.h
+    ${J_SRC_DIR}/base/fsm/fsmtransition.cpp
+)
+source_group(base\\fsm FILES ${J_BASE_FSM_SRCS})
+
+
 set(J_BASE_EVENT_SRCS
     ${J_SRC_DIR}/base/event/event.h
     ${J_SRC_DIR}/base/event/event.cpp
@@ -73,6 +90,7 @@ source_group(component\\template\\record FILES ${J_COMPONENT_TEMPLATE_RECORD_SRC
 # static library
 add_library(opensc STATIC
     ${J_BASE_SRCS}
+    ${J_BASE_FSM_SRCS}
     ${J_BASE_EVENT_SRCS}
     ${J_COMPONENT_ENTITY_SRCS}
     ${J_COMPONENT_TEMPLATE_SRCS}

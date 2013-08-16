@@ -46,6 +46,17 @@ public:
     bool operator==(const matrix44& rhs) const;
     /// inequality operator
     bool operator!=(const matrix44& rhs) const;
+    
+    /// load content from 16-byte-aligned memory
+    void load(const scalar* ptr);
+    /// load content from unaligned memory
+    void loadu(const scalar* ptr);
+    /// write content to 16-byte-aligned memory through the write cache
+    void store(scalar* ptr) const;
+    /// write content to unaligned memory through the write cache
+    void storeu(scalar* ptr) const;
+    /// stream content to 16-byte-aligned memory circumventing the write-cache
+    void stream(scalar* ptr) const;
 
     /// set content
     void set(float4 const &row0, float4 const &row1, float4 const &row2, float4 const &row3);
@@ -249,6 +260,71 @@ __forceinline bool
 matrix44::operator!=(const matrix44& rhs) const
 {
     return this->mx != rhs.mx;
+}
+
+//------------------------------------------------------------------------------
+/**
+ */
+__forceinline void
+matrix44::load(const scalar* ptr)
+{
+    float4 v0, v1, v2, v3;
+    v0.load(ptr);
+    v1.load(ptr + 4);
+    v2.load(ptr + 8);
+    v3.load(ptr + 12);
+    this->set(v0, v1, v2, v3);
+}
+
+//------------------------------------------------------------------------------
+/**
+ */
+__forceinline void
+matrix44::loadu(const scalar* ptr)
+{
+    float4 v0, v1, v2, v3;
+    v0.loadu(ptr);
+    v1.loadu(ptr + 4);
+    v2.loadu(ptr + 8);
+    v3.loadu(ptr + 12);
+    this->set(v0, v1, v2, v3);
+}
+
+//------------------------------------------------------------------------------
+/**
+ */
+__forceinline void
+matrix44::store(scalar* ptr) const
+{
+    this->get_xaxis().store(ptr);
+    this->get_yaxis().store(ptr+4);
+    this->get_zaxis().store(ptr+8);
+    this->get_position().store(ptr+12);
+}
+
+//------------------------------------------------------------------------------
+/**
+ */
+__forceinline void
+matrix44::storeu(scalar* ptr) const
+{
+    this->get_xaxis().storeu(ptr);
+    this->get_yaxis().storeu(ptr+4);
+    this->get_zaxis().storeu(ptr+8);
+    this->get_position().storeu(ptr+12);
+}
+
+
+//------------------------------------------------------------------------------
+/**
+ */
+__forceinline void
+matrix44::stream(scalar* ptr) const
+{
+    this->get_xaxis().stream(ptr);
+    this->get_yaxis().stream(ptr+4);
+    this->get_zaxis().stream(ptr+8);
+    this->get_position().stream(ptr+12);
 }
 
 //------------------------------------------------------------------------------

@@ -28,11 +28,9 @@
 #include "util/dictionary.h"
 #include "memory/heap.h"
 
-#if !__OSX__
 #include "math/float4.h"
 #include "math/float2.h"
 #include "math/matrix44.h"
-#endif
 
 #include "memory/poolarrayallocator.h"
 
@@ -167,14 +165,14 @@ public:
     /// set as bool value
     void SetBool(bool val);	
     
-    #if !__OSX__
+
     /// set as float2 value
     void SetFloat2(const Math::float2& v);
     /// set as float4 value
     void SetFloat4(const Math::float4& v);
     /// set as matrix44 value
     void SetMatrix44(const Math::matrix44& v);
-    #endif
+
     /// generic setter
     template<typename T> void Set(const T& t);
 
@@ -184,14 +182,14 @@ public:
     void AppendFloat(float val);
     /// append bool value
     void AppendBool(bool val);
-    #if !__OSX__
+
 	/// append float2 value
 	void AppendFloat2(const Math::float2& v);
     /// append float4 value
     void AppendFloat4(const Math::float4& v);
     /// append matrix44 value
     void AppendMatrix44(const Math::matrix44& v);
-    #endif
+
     /// generic append
     template<typename T> void Append(const T& t);
 
@@ -205,14 +203,14 @@ public:
     float AsFloat() const;
     /// return contents as bool
     bool AsBool() const;
-    #if !__OSX__
+
 	/// return contents as float2
 	Math::float2 AsFloat2() const;
     /// return contents as float4
     Math::float4 AsFloat4() const;
     /// return contents as matrix44
     Math::matrix44 AsMatrix44() const;
-    #endif
+
     /// convert to "anything"
     template<typename T> T As() const;
 
@@ -222,14 +220,14 @@ public:
     bool IsValidFloat() const;
     /// return true if the content is a valid bool
     bool IsValidBool() const;
-    #if !__OSX__
+
 	/// return true if the content is a valid float2
 	bool IsValidFloat2() const;
     /// return true if the content is a valid float4
     bool IsValidFloat4() const;
     /// return true if content is a valid matrix44
     bool IsValidMatrix44() const;
-    #endif
+
     /// generic valid checker
     template<typename T> bool IsValid() const;
 
@@ -239,14 +237,14 @@ public:
     static String FromFloat(float f);
     /// construct a string from a bool
     static String FromBool(bool b);
-    #if !__OSX__
+
 	/// construct a string from float2
 	static String FromFloat2(const Math::float2& v);
     /// construct a string from float4
     static String FromFloat4(const Math::float4& v);
     /// construct a string from matrix44
     static String FromMatrix44(const Math::matrix44& m);
-    #endif
+
     /// convert from "anything"
     template<typename T> static String From(const T& t);
 
@@ -482,7 +480,7 @@ String::SetBool(bool val)
     }
 }
 
-#if !__OSX__
+
 //------------------------------------------------------------------------------
 /**
 */
@@ -516,7 +514,7 @@ String::SetMatrix44(const Math::matrix44& m)
                  m.getrow2().x(), m.getrow2().y(), m.getrow2().z(), m.getrow2().w(),
                  m.getrow3().x(), m.getrow3().y(), m.getrow3().z(), m.getrow3().w());
 }
-#endif // __OSX__
+
     
 //------------------------------------------------------------------------------
 /**
@@ -820,7 +818,7 @@ String::IsValidFloat() const
     return this->CheckValidCharSet(" \t-+.e1234567890");
 }
 
-#if !__OSX__
+
 //------------------------------------------------------------------------------
 /**
     Note: this method is not 100% correct, it just checks for invalid characters.
@@ -882,7 +880,7 @@ String::AsFloat4() const
     Math::float4 v(tokens[0].AsFloat(), tokens[1].AsFloat(), tokens[2].AsFloat(), tokens[3].AsFloat());
     return v;
 }
-#endif
+
 
 //------------------------------------------------------------------------------
 /**
@@ -926,7 +924,7 @@ String::FromBool(bool b)
     return str;
 }
 
-#if !__OSX__
+
 //------------------------------------------------------------------------------
 /**
 */
@@ -959,7 +957,7 @@ String::FromMatrix44(const Math::matrix44& m)
     str.SetMatrix44(m);
     return str;
 }
-#endif
+
     
 //------------------------------------------------------------------------------
 /**
@@ -988,7 +986,7 @@ String::AppendBool(bool val)
     this->Append(FromBool(val));
 }
 
-#if !__OSX__    
+
 //------------------------------------------------------------------------------
 /**
 */
@@ -1015,7 +1013,7 @@ String::AppendMatrix44(const Math::matrix44& val)
 {
     this->Append(FromMatrix44(val));
 }
-#endif
+
     
 } // namespace Util
 //------------------------------------------------------------------------------
