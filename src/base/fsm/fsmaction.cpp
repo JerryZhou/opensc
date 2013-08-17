@@ -13,7 +13,7 @@ FsmAction::~FsmAction(){
 }
 
 /// apply to the context
-bool FsmAction::apply(FsmContext* ct, FsmEvent* et) const{
+bool FsmAction::Apply(FsmContext* ct, FsmEvent* et) const{
     return false;
 }
     

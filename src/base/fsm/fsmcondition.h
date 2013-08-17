@@ -14,7 +14,7 @@ public:
     virtual ~FsmCondition();
 
     /// check if the context is statify the condition
-    bool check(FsmContext* ct, FsmEvent* et) const;
+    bool Check(FsmContext* ct, FsmEvent* et) const;
 
 protected:
     /// data members

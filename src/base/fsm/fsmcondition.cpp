@@ -13,7 +13,7 @@ FsmCondition::~FsmCondition(){
 }
 
 /// check if the context is statify the condition
-bool FsmCondition::check(FsmContext* ct, FsmEvent* et) const{
+bool FsmCondition::Check(FsmContext* ct, FsmEvent* et) const{
     return false;
 }
 

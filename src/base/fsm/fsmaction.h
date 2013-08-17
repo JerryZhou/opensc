@@ -15,7 +15,7 @@ public:
     virtual ~FsmAction();
 
     /// apply to the context
-    virtual bool apply(FsmContext* ct, FsmEvent* et) const;
+    virtual bool Apply(FsmContext* ct, FsmEvent* et) const;
     
 protected:
 };// end of FsmAction

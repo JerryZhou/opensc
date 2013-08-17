@@ -32,17 +32,17 @@ public:
     virtual ~Fsm();
 
     /// init the fsmContext
-    bool setupContext(FsmContext* ct);
+    bool SetupContext(FsmContext* ct);
 
     /// add a transition to fsm
-    void addTransition(int evt, FsmTransition* transition);
+    void AddTransition(int evt, FsmTransition* transition);
 
     /// drive the fsm to the next state
-    void update(FsmContext* ct, int evt, void *evtParam);
+    void Update(FsmContext* ct, int evt, void *evtParam);
 
 protected:
     /// get current transitions
-    const Util::Array<FsmTransition*>& transitionsWhen(int state, int evt) const;
+    const Util::Array<FsmTransition*>& TransitionsWhen(int state, int evt) const;
 
     /// type nonations
     typedef int State;

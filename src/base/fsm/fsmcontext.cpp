@@ -12,29 +12,29 @@ FsmContext::~FsmContext(){
 }
 
 /// return current state
-int FsmContext::curState() const{
+int FsmContext::CurState() const{
     return this->cur;
 }
 
 /// set current state to c
-void FsmContext::setCurState(int c){
+void FsmContext::SetCurState(int c){
     IF_DO(this->cur==c, return);
     int from = this->cur;
     
-    onLeave(this->cur);
+    OnLeave(this->cur);
     this->cur = c;
-    onEnter(c);
+    OnEnter(c);
     
-    onTransition(from, c);
+    OnTransition(from, c);
 }
 
 /// return next state
-int FsmContext::nextState() const{
+int FsmContext::NextState() const{
     return this->next;
 }
 
 /// set next state to n
-void FsmContext::setNextState(int n){
+void FsmContext::SetNextState(int n){
     this->next = n;
 }
 }

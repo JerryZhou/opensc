@@ -11,22 +11,22 @@ public:
     virtual ~FsmContext();
 
     /// return current state
-    int curState() const;
+    int CurState() const;
     /// set current state to c 
-    void setCurState(int c);
+    void SetCurState(int c);
 
     /// return next state
-    int nextState() const;
+    int NextState() const;
     /// set next state to n
-    void setNextState(int n);
+    void SetNextState(int n);
 
 protected:
     /// when change the current state 
-    virtual void onTransition(int from, int to);
+    virtual void OnTransition(int from, int to);
     /// enter current state
-    virtual void onEnter(int to);
+    virtual void OnEnter(int to);
     /// leave current state
-    virtual void onLeave(int from);
+    virtual void OnLeave(int from);
 
     /// current state
     int cur;

@@ -20,23 +20,23 @@ public:
     virtual ~FsmTransition();
 
     /// transition : from (state) ---(conditions) ----> to (state)
-    int from() const;
+    int From() const;
 
     /// set transition : to (state)
-    void setTo(int to);
+    void SetTo(int to);
     /// get transition : to (state)
-    int to() const;
+    int To() const;
 
     /// append action to actionlist, that will called when transition happened.
-    void addAction(FsmAction* action);
+    void AddAction(FsmAction* action);
     /// append condition to conditionlist
-    void addCondition(FsmCondition* condition);
+    void AddCondition(FsmCondition* condition);
 
     /// if the condition is checked and returned true, will call apply actions
-    bool applyAction(FsmContext* ct, FsmEvent* evt) const;
+    bool ApplyAction(FsmContext* ct, FsmEvent* evt) const;
 
     /// when the transition is trigered, shall checking the conditions before do real actions
-    bool checkCondition(FsmContext* ct, FsmEvent* evt) const;
+    bool CheckCondition(FsmContext* ct, FsmEvent* evt) const;
     
 protected:
     /// transtion will change state from FromState to ToState

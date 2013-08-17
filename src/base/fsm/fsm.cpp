@@ -16,16 +16,16 @@ Fsm::~Fsm(){
 }
 
 /// init the fsmContext
-bool Fsm::setupContext(FsmContext* ct){
-    ct->setCurState(this->firstState);
-    ct->setNextState(InvalidState);
+bool Fsm::SetupContext(FsmContext* ct){
+    ct->SetCurState(this->firstState);
+    ct->SetNextState(InvalidState);
     return true;
 }
 
 /// add transition to fsm
-void Fsm::addTransition(int evt, FsmTransition* tn){
+void Fsm::AddTransition(int evt, FsmTransition* tn){
 
-    State from = tn->from();
+    State from = tn->From();
 
     IndexT idx = this->fsmMachine.FindIndex(from);
     if(idx != InvalidIndex){
@@ -52,9 +52,9 @@ void Fsm::addTransition(int evt, FsmTransition* tn){
 }
 
 /// drived the fsmContext to next state
-void Fsm::update(FsmContext* ct, int evt, void *evtParam){
+void Fsm::Update(FsmContext* ct, int evt, void *evtParam){
     // get current transitions
-    const FsmTransitionArray& transitions = transitionsWhen(ct->curState(), evt);
+    const FsmTransitionArray& transitions = TransitionsWhen(ct->curState(), evt);
     IF_DO(transitions.Size() == 0, return);
 
     // construct a fsm evt
@@ -65,15 +65,15 @@ void Fsm::update(FsmContext* ct, int evt, void *evtParam){
         // get transition from idx
         FsmTransition * transition = transitions[idx];
         // check conditions
-        if( transition->checkCondition(ct, &fsmEvt) ){
+        if( transition->CheckCondition(ct, &fsmEvt) ){
             // change to next state
-            ct->setNextState(transition->to()); 
+            ct->SetNextState(transition->to()); 
             // run actions
-            if( transition->applyAction(ct, &fsmEvt) ){
+            if( transition->ApplyAction(ct, &fsmEvt) ){
                 // change cur state to next state
-                ct->setCurState(transition->to());
+                ct->SetCurState(transition->to());
                 // reset next state
-                ct->setNextState(InvalidState);
+                ct->SetNextState(InvalidState);
                 // break the loop
                 break;
             }
@@ -82,7 +82,7 @@ void Fsm::update(FsmContext* ct, int evt, void *evtParam){
 }
 
 /// get the transtions at currentstate(state) will change do when the event (evt) happend
-const Util::Array<FsmTransition*>& Fsm::transitionsWhen(int state, int evt) const{
+const Util::Array<FsmTransition*>& Fsm::TransitionsWhen(int state, int evt) const{
     // state map
     IndexT idx = this->fsmMachine.FindIndex(state);
     if(idx != InvalidIndex){
