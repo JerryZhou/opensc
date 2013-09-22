@@ -87,6 +87,25 @@ set(J_COMPONENT_TEMPLATE_RECORD_SRCS
 )
 source_group(component\\template\\record FILES ${J_COMPONENT_TEMPLATE_RECORD_SRCS})
 
+file(GLOB J_SIMULATION_SRCS_H "${J_SRC_DIR}/simulation/*.h")
+file(GLOB J_SIMULATION_SRCS_CPP "${J_SRC_DIR}/simulation/*.cpp")
+LIST(APPEND J_SIMULATION_SYSTEM_SRCS 
+    ${J_SIMULATION_SRCS_H} 
+    ${J_SIMULATION_SRCS_CPP})
+source_group(simulation FILES ${J_SIMULATION_SRCS})
+
+
+file(GLOB J_SIMULATION_SYSTEM_SRCS_H "${J_SRC_DIR}/simulation/system/*.h")
+file(GLOB J_SIMULATION_SYSTEM_SRCS_CPP "${J_SRC_DIR}/simulation/system/*.cpp")
+LIST(APPEND J_SIMULATION_SYSTEM_SRCS 
+    ${J_SIMULATION_SYSTEM_SRCS_H} 
+    ${J_SIMULATION_SYSTEM_SRCS_CPP})
+source_group(simulation\\system FILES ${J_SIMULATION_SYSTEM_SRCS})
+
+#aux_source_directory($(J_SRC_DIR}/network J_NETWORK_SRCS)
+#message(${J_NETWORK_SRCS})
+#source_group(network FILES ${J_NETWORK_SRCS})
+
 # static library
 add_library(opensc STATIC
     ${J_BASE_SRCS}
@@ -95,6 +114,8 @@ add_library(opensc STATIC
     ${J_COMPONENT_ENTITY_SRCS}
     ${J_COMPONENT_TEMPLATE_SRCS}
     ${J_COMPONENT_TEMPLATE_RECORD_SRCS}
+    ${J_SIMULATION_SRCS}
+    ${J_SIMULATION_SYSTEM_SRCS}
 )
 
 # out put library
